@@ -1,0 +1,36 @@
+Equipamento 
+    id: Long; 
+    nome: String; 
+    custo: float; 
+    estoque: int; 
+    categoria: Categoria 
+
+Usuario 
+    id: Long; 
+    nomeCompleto: String; 
+    dataNascimento: LocalDateTime 
+    endereco: String 
+    cpf: int 
+    permissão: int 
+    formaPagamento: List<Pagamento> 
+    carrinhoAtual: Carrinho 
+    historico: List<Carrinho> 
+
+Categoria 
+    id: Long; 
+    nome: String; 
+    
+Pagamento 
+    id: Long 
+    nome: String; 
+
+Carrinho 
+    id: Long 
+    custoTotal: float 
+    itens: List<ItemCarrinho> 
+
+ItemCarrinho 
+    id: long 
+    carrinho: Carrinho 
+    custo: long 
+    produto: Equipamento 
