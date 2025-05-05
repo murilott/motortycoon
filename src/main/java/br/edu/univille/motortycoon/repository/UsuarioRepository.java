@@ -1,8 +1,8 @@
-package br.edu.univille.capacete.repository;
+package br.edu.univille.motortycoon.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.edu.univille.capacete.entity.Usuario;
+import br.edu.univille.motortycoon.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     

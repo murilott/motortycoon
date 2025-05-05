@@ -1,5 +1,6 @@
-package br.edu.univille.capacete.entity;
+package br.edu.univille.motortycoon.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 

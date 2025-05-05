@@ -1,4 +1,4 @@
-package br.edu.univille.capacete.service;
+package br.edu.univille.motortycoon.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.expression.Strings;
 
-import br.edu.univille.capacete.entity.Carrinho;
-import br.edu.univille.capacete.repository.CarrinhoRepository;
+import br.edu.univille.motortycoon.entity.Carrinho;
+import br.edu.univille.motortycoon.repository.CarrinhoRepository;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

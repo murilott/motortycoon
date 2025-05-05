@@ -1,7 +1,8 @@
-package br.edu.univille.capacete.controller;
+package br.edu.univille.motortycoon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.edu.univille.capacete.entity.Categoria;
-import br.edu.univille.capacete.service.CategoriaService;
+import br.edu.univille.motortycoon.entity.Categoria;
+import br.edu.univille.motortycoon.service.CategoriaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/categoria")

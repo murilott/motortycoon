@@ -1,8 +1,8 @@
-package br.edu.univille.capacete.repository;
+package br.edu.univille.motortycoon.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.edu.univille.capacete.entity.ItemCarrinho;
+import br.edu.univille.motortycoon.entity.ItemCarrinho;
 
 public interface ItemCarrinhoRepository extends JpaRepository<ItemCarrinho, Long> {
     
