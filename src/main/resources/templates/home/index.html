@@ -10,5 +10,18 @@
         <nav th:replace="~{layout :: header}"></nav>
 
         <h1>Bem vindo a Motor Tycoon</h1>
+
+        <h2>Produtos</h2>
+
+        <div th:if="${lista.size()} > 0">
+            <ul th:each="e : ${lista}" style="border: 1px solid; width: 250px;">
+                <li>Código: <span th:text="${e.id}"></span> </li>
+                <li>Nome: <span th:text="${e.nome}"></span> </li>
+                <li>Custo: <span th:text="${e.custo}"></span> </li>
+                <li>Estoque: <span th:text="${e.estoque}"></span> </li>
+                <li>Categoria: <span th:text="${e.categoria.nome}"></span> </li>
+                <a th:href="@{equipamento/view/{id}(id=${e.id})}">Comprar</a>
+                </ul>
+        </div>
     </body>
 </html>

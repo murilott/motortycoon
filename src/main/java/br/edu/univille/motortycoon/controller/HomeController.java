@@ -17,13 +17,13 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    // @Autowired
-    // private EquipamentoService service;
+    @Autowired
+    private EquipamentoService service;
 
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("home/index");
-        // mv.addObject("lista", service.obterTodos());
+        mv.addObject("lista", service.obterTodos());
         return mv;
     }
 }
