@@ -15,8 +15,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class ItemCarrinho {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private ItemCarrinho carrinho;
+    @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carrinho_id")
+    private Carrinho carrinho;
     private long custo;
+    @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @JoinColumn(name = "produto_id")
     private Equipamento produto;
 }
