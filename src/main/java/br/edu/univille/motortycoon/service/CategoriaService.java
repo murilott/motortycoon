@@ -24,7 +24,7 @@ public class CategoriaService {
     }
 
     public List<Categoria> obterTodos(){
-        return repository.findAll(Sort.by("marca"));
+        return repository.findAll();
     }
 
     public void salvar(Categoria Categoria) {
