@@ -16,8 +16,13 @@
         </div>
 
         <form th:action="@{/categoria/salvar}" th:object="${elemento}" method="post">
-            <input type="text" placeholder="Nome:" th:field="*{nome}">
-            <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro de nome</p>
+            <div>
+                <label for="nome">Nome:</label>
+                
+                <input type="text" placeholder="Nome:" th:field="*{nome}">
+                <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro de nome</p>
+            </div>
+
             <button id="btnSalvar" type="submit">Salvar</button>
         </form>
     </body>

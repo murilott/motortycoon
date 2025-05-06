@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.motortycoon.entity.Equipamento;
+import br.edu.univille.motortycoon.service.CategoriaService;
 import br.edu.univille.motortycoon.service.EquipamentoService;
 import jakarta.validation.Valid;
 
@@ -19,6 +20,9 @@ import jakarta.validation.Valid;
 public class EquipamentoController {
     @Autowired
     private EquipamentoService service;
+
+    @Autowired
+    private CategoriaService categoriaService;
 
     @GetMapping
     public ModelAndView index(){
@@ -32,9 +36,10 @@ public class EquipamentoController {
     public ModelAndView novo(){
         var mv = new ModelAndView("equipamento/novo");
         mv.addObject("elemento", new Equipamento());
+        mv.addObject("listaCategoria", categoriaService.obterTodos());
         return mv;
     }
-
+    
     @PostMapping
     @RequestMapping("/salvar")
     public ModelAndView salvarNovo(@Valid @ModelAttribute("elemento") Equipamento equipamento, BindingResult bindingResult){
@@ -42,6 +47,7 @@ public class EquipamentoController {
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("equipamento/novo");
                 mv.addObject("elemento", equipamento);
+                mv.addObject("listaCategoria", categoriaService.obterTodos());
                 return mv;
             }
             
@@ -51,6 +57,7 @@ public class EquipamentoController {
             var mv = new ModelAndView("equipamento/novo");
             mv.addObject("elemento", equipamento);
             mv.addObject("erro", e.getMessage());
+            mv.addObject("listaCategoria", categoriaService.obterTodos());
             return mv;
         }
     }
