@@ -15,6 +15,7 @@
 
         <div th:if="${lista.size()} > 0">
             <ul th:each="e : ${lista}" style="border: 1px solid; width: 250px;">
+                <li><img th:src="${e.imagem}" style="width:100px;"></li>
                 <li>Código: <span th:text="${e.id}"></span> </li>
                 <li>Nome: <span th:text="${e.nome}"></span> </li>
                 <li>Custo: <span th:text="${e.custo}"></span> </li>

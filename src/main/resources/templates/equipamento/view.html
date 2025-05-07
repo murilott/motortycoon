@@ -11,6 +11,7 @@
         <h2>Visualizando produto: <span th:if="${elemento}" th:text="${elemento.nome}"></span></h2>
 
         <ul th:if="${elemento}" style="border: 1px solid; width: 250px;">
+            <li><img th:src="${elemento.imagem}" style="width:100px;"> </li>
             <li>Código: <span th:text="${elemento.id}"></span> </li>
             <li>Nome: <span th:text="${elemento.nome}"></span> </li>
             <li>Custo: <span th:text="${elemento.custo}"></span> </li>
