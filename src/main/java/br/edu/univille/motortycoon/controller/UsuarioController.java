@@ -1,8 +1,11 @@
 package br.edu.univille.motortycoon.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,7 +62,12 @@ public class UsuarioController {
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("usuario/novo");
                 mv.addObject("listaPagamento", pagamentoService.obterTodos());
-                mv.addObject("usuario", usuario);
+                mv.addObject("elemento", usuario);
+                
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                for (FieldError error : errors ) {
+                    mv.addObject("erroBinding", error.getObjectName() + " - " + error.getDefaultMessage());
+                }
 
                 return mv;
             }

@@ -87,7 +87,7 @@ public class EquipamentoController {
 
     @GetMapping
     @RequestMapping("/view/{id}")
-    public ModelAndView view(@Valid @PathVariable long id, @ModelAttribute("itemCarrinho") ItemCarrinho item, BindingResult bindingResult) {
+    public ModelAndView view(@Valid @PathVariable("id") long id, @ModelAttribute("itemCarrinho") ItemCarrinho item, BindingResult bindingResult) {
         try{
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("equipamento/view");

@@ -27,7 +27,7 @@
             <div>
                 <label for="dataNascimento">Data de Nascimento</label>
 
-                <input type="Date" placeholder="Data de Nascimento:" th:field="*{dataNascimento}">
+                <input type="date" placeholder="Data de Nascimento:" th:field="*{dataNascimento}">
                 <p th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}">Erro de data</p>
             </div>
 
@@ -48,7 +48,7 @@
             <div>
                 <label for="cpf">CPF</label>
 
-                <input type="text" placeholder="CPF:" th:field="*{cpf}">
+                <input type="int" placeholder="CPF:" th:field="*{cpf}">
                 <p th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">Erro de CPF</p>
             </div>
 
@@ -72,5 +72,6 @@
         </form>
 
         <p th:if="${erro != null}" th:text="${erro}"></p>
+        <p th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
     </body>
 </html>

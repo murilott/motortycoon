@@ -24,4 +24,5 @@ public class Equipamento {
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+    private String imagem;
 }

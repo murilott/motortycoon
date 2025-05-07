@@ -48,6 +48,13 @@
                     </option>
                 </select>            
             </div>
+
+            <div>
+                <label for="imagem">Insira uma imagem</label>
+
+                <input type="text" placeholder="Imagem:" th:field="*{imagem}">
+                <p th:if="${#fields.hasErrors('imagem')}" th:errors="*{imagem}">Erro de imagem</p>
+            </div>
             
             <button id="btnSalvar" type="submit">Salvar</button>
         </form>
