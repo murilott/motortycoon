@@ -24,7 +24,7 @@ public class CarrinhoService {
     }
 
     public List<Carrinho> obterTodos(){
-        return repository.findAll(Sort.by("marca"));
+        return repository.findAll();
     }
 
     public void salvar(Carrinho Carrinho) {

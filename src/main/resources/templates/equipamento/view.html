@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Produto</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <h2>Visualizando produto: <span th:if="${elemento}" th:text="${elemento.nome}"></span></h2>
+
+        <ul th:if="${elemento}" style="border: 1px solid; width: 250px;">
+            <li>Código: <span th:text="${elemento.id}"></span> </li>
+            <li>Nome: <span th:text="${elemento.nome}"></span> </li>
+            <li>Custo: <span th:text="${elemento.custo}"></span> </li>
+            <li>Estoque: <span th:text="${elemento.estoque}"></span> </li>
+            <li>Categoria: <span th:text="${elemento.categoria.nome}"></span> </li>
+        </ul>
+
+        <form th:action="@{/carrinho/adicionar}" th:object="${itemCarrinho}" method="post">
+            <div>
+                <label>Id carrinho</label>
+                <td><input readonly type="text" th:field="*{carrinho.id}"></td>
+                <label>Id itemCarrinho</label>
+                <td><input readonly type="text" th:field="*{id}"></td>
+                <label>Id produto</label>
+                <td><input readonly type="text" th:field="*{produto.id}"></td>
+            </div>
+            <!-- <td><input readonly type="hidden" th:field="*{produto.id}"></td> -->
+
+            <div>
+                <label for="quantidade">Quantidade</label>
+
+                <input type="number" placeholder="Quantidade:" th:field="*{quantidade}">
+                <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Erro de quantidade</p>
+            </div>
+
+            <div>
+                <label for="carrinho">Carrinho</label>
+
+                <select name="carrinho" id="carrinho" th:field="*{carrinho}">
+                    <option th:each="carrinho : ${listaCarrinho}"
+                        th:value="${carrinho.id}"
+                        th:text="${carrinho.nome}">
+                    </option>
+                </select>            
+            </div>
+            
+            <button id="btnSalvar" type="submit">Adicionar ao carrinho</button>
+        </form>
+
+        <p th:if="${erro != null}" th:text="${erro}"></p>
+    </body>
+</html>

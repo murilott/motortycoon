@@ -24,7 +24,7 @@ public class EquipamentoService {
     }
 
     public List<Equipamento> obterTodos(){
-        return repository.findAll(Sort.by("marca"));
+        return repository.findAll();
     }
 
     public void salvar(Equipamento Equipamento) {

@@ -24,7 +24,7 @@ public class UsuarioService {
     }
 
     public List<Usuario> obterTodos(){
-        return repository.findAll(Sort.by("marca"));
+        return repository.findAll();
     }
 
     public void salvar(Usuario Usuario) {

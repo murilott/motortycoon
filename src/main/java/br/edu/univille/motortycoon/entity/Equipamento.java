@@ -15,9 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Equipamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private float custo;
     private int estoque;
-    private int categoria;
+    @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 }

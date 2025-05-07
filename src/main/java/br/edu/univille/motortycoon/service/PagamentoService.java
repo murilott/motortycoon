@@ -24,7 +24,7 @@ public class PagamentoService {
     }
 
     public List<Pagamento> obterTodos(){
-        return repository.findAll(Sort.by("marca"));
+        return repository.findAll();
     }
 
     public void salvar(Pagamento Pagamento) {
