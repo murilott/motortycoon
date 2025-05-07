@@ -21,7 +21,9 @@
                 <li>Estoque: <span th:text="${e.estoque}"></span> </li>
                 <li>Categoria: <span th:text="${e.categoria.nome}"></span> </li>
                 <a th:href="@{equipamento/view/{id}(id=${e.id})}">Comprar</a>
-                </ul>
+            </ul>
         </div>
+
+        <p th:if="${lista.size()} == 0" th:text="Não há produtos cadastrados"></p>
     </body>
 </html>

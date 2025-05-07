@@ -25,5 +25,7 @@
 
             <button id="btnSalvar" type="submit">Salvar</button>
         </form>
+
+        <p th:if="${erro != null}" th:text="${erro}"></p>
     </body>
 </html>

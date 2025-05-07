@@ -49,5 +49,7 @@
             
             <button id="btnSalvar" type="submit">Adicionar ao carrinho</button>
         </form>
+
+        <p th:if="${erro != null}" th:text="${erro}"></p>
     </body>
 </html>
