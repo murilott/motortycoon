@@ -68,10 +68,11 @@ public class UsuarioController {
                 for (FieldError error : errors ) {
                     mv.addObject("erroBinding", error.getObjectName() + " - " + error.getDefaultMessage());
                 }
-
+                
                 return mv;
             }
-
+            
+            System.out.println("CPFFFFF!!!" + usuario.getCpf());
             service.salvar(usuario);
             return new ModelAndView("redirect:/usuario");
         }catch (Exception e){
