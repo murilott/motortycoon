@@ -23,23 +23,16 @@
             </ul>
 
             <ul id="login">
+                <li>Bem vindo, <span  th:remove="tag" sec:authentication="email"></span></li>
+
                 <li><a th:href="@{/usuario/novo}">Cadastrar</a></li>
                 <li><a th:href="@{/usuario/login}">Login</a></li>
+
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sair"/>
+                </form>
             </ul>
         </div>
     </nav>
-    
-    <div id="corpo">
-        <div id="outer">
-    
-        </div>
-
-        <div id="inner">
-           <!-- <p>Links</p> -->
-           <p>Bem vindo</p>
-           <p>Selecione 1 link acima</p>
-        
-        </div>
-    </div>
 </body>
 </html>

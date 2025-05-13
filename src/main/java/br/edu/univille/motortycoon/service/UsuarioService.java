@@ -23,6 +23,10 @@ public class UsuarioService {
         return repository.findById(id);
     }
 
+    public Optional<Usuario> obterPeloEmail(string email){
+        return repository.findByEmail(email);
+    }
+
     public List<Usuario> obterTodos(){
         return repository.findAll();
     }
