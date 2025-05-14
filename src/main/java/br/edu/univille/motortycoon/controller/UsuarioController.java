@@ -3,6 +3,7 @@ package br.edu.univille.motortycoon.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -28,6 +29,9 @@ public class UsuarioController {
     @Autowired
     private PagamentoService pagamentoService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("usuario/index");
@@ -46,7 +50,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    @RequestMapping("/novo")
+    @RequestMapping("/registrar")
     public ModelAndView novo(){
         var mv = new ModelAndView("usuario/novo");
         mv.addObject("elemento", new Usuario());
@@ -72,7 +76,10 @@ public class UsuarioController {
                 return mv;
             }
             
-            System.out.println("CPFFFFF!!!" + usuario.getCpf());
+            if (!service.obterTodos().contains(usuario)) {
+                usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));;
+            }
+
             service.salvar(usuario);
             return new ModelAndView("redirect:/usuario");
         }catch (Exception e){
@@ -110,4 +117,5 @@ public class UsuarioController {
 
         return new ModelAndView("redirect:/usuario");
     }
+
 }
