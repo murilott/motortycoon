@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.expression.Strings;
 
@@ -19,23 +20,38 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Optional<Usuario> obterPeloId(long id){
         return repository.findById(id);
     }
 
-    public Optional<Usuario> obterPeloEmail(string email){
+    public Optional<Usuario> obterPeloEmail(String email){
         return repository.findByEmail(email);
     }
 
     public List<Usuario> obterTodos(){
         return repository.findAll();
     }
-
-    public void salvar(Usuario Usuario) {
-        repository.save(Usuario);
+    
+    public void salvar(Usuario usuario) {
+        repository.save(usuario);
     }
 
-    public void excluir(Usuario Usuario) {
-        repository.delete(Usuario);
+    public void excluir(Usuario usuario) {
+        repository.delete(usuario);
     }
+
+    public void registrar(Usuario usuario) {
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));;
+        repository.save(usuario);
+    }
+
+    // public Usuario registrar(String email, String senha) {
+    //     Usuario usuario = new Usuario();
+    //     usuario.setEmail(email);
+    //     usuario.setPassword(passwordEncoder.encode(password));
+    //     return repository.save(usuario);
+    // }
 }
