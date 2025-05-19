@@ -24,7 +24,15 @@ public class SecurityConfig implements WebMvcConfigurer {
 			.requestMatchers("/registrar", "/login", "/").permitAll()
 			.anyRequest().authenticated()
 		)
-			.formLogin(Customizer.withDefaults())
+        .formLogin((formLogin) ->
+        formLogin
+            .usernameParameter("email")
+            .passwordParameter("senha")
+            .loginPage("/usuario")
+            // .failureUrl("/usuario/login?failed")
+            .loginProcessingUrl("/usuario/login/process")
+        )
+			// .formLogin(Customizer.withDefaults())
 			.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login"));
 
 
