@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/cadastro.css">
+        <title>Novo Usuario</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <div>
+            <h2>Cadastrar Usuario</h2>
+
+            <button>Voltar</button>
+        </div>
+
+        <form th:action="@{/usuario/salvar}" th:object="${elemento}" method="post">
+            <div>
+                <label for="nome">Nome</label>
+
+                <input type="text" placeholder="Nome completo:" th:field="*{nomeCompleto}">
+                <p th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}">Erro de nome</p>
+            </div>
+
+            <div>
+                <label for="dataNascimento">Data de Nascimento</label>
+
+                <input type="date" placeholder="Data de Nascimento:" th:field="*{dataNascimento}">
+                <p th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}">Erro de data</p>
+            </div>
+
+            <div>
+                <label for="endereco">Endereço</label>
+
+                <input type="text" placeholder="Endereço:" th:field="*{endereco}">
+                <p th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}">Erro de endereco</p>
+            </div>
+
+            <div>
+                <label for="senha">Senha</label>
+
+                <input type="text" placeholder="Senha:" th:field="*{senha}">
+                <p th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">Erro de senha</p>
+            </div>
+
+            <div>
+                <label for="cpf">CPF</label>
+
+                <input type="number" placeholder="CPF:" th:field="*{cpf}">
+                <p th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">Erro de CPF</p>
+            </div>
+
+            <div>
+                <label for="permissao">Permissões</label>
+
+                <input type="number" placeholder="Permissões:" th:field="*{permissao}">
+                <p th:if="${#fields.hasErrors('permissao')}" th:errors="*{permissao}">Erro de permissão</p>
+            </div>
+
+            <div>
+                <label for="formaPagamento">Formas de pagamento</label>
+
+                <select th:field="*{formaPagamento}" multiple="multiple">
+                    <option th:each="forma : ${listaPagamento}" th:value="${forma.id}" th:text="${forma.nome}"></option>
+                </select>
+                <p th:if="${#fields.hasErrors('formaPagamento')}" th:errors="*{formaPagamento}">Erro de forma de pagamento</p>
+            </div>
+        
+            <button id="btnSalvar" type="submit">Salvar</button>
+        </form>
+
+        <p th:if="${erro != null}" th:text="${erro}"></p>
+        <p th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
+    </body>
+</html>
