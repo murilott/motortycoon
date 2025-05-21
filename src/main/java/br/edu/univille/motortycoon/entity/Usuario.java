@@ -35,8 +35,9 @@ public class Usuario{
     private String endereco;
     private String senha;
     private int cpf;
-    @Enumerated(EnumType.STRING)
-    private Cargo cargo;
+    // @Enumerated(EnumType.STRING)
+    // private Cargo cargo;
+    private String cargo;
     @ManyToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
     private List<Pagamento> formaPagamento;
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)

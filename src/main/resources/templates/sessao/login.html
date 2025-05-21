@@ -20,9 +20,9 @@
             Você deslogou.
         </div>
 
-        <form th:action="@{/usuario/}" method="post">
+        <form th:action="${loginProcessingUrl}" method="post">
             <div>
-                <label for="nome">Email:</label>
+                <label for="email">Email:</label>
 
                 <input type="text" placeholder="Seu email" name="email">
             </div>
@@ -34,6 +34,8 @@
             </div>
 
             <button id="btnSalvar" type="submit">Entrar</button>
+
+            <a th:href="@{/login/registrar}">Registre-se</a>
         </form>
 
         <p th:if="${erro != null}" th:text="${erro}"></p>

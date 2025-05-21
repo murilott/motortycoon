@@ -21,19 +21,19 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
 			.authorizeHttpRequests(auth -> auth
-			.requestMatchers("/registrar", "/login", "/").permitAll()
+			.requestMatchers("/login/registrar", "/login", "/").permitAll()
 			.anyRequest().authenticated()
 		)
         .formLogin((formLogin) ->
         formLogin
             .usernameParameter("email")
             .passwordParameter("senha")
-            .loginPage("/usuario")
+            .loginPage("/login")
             // .failureUrl("/usuario/login?failed")
-            .loginProcessingUrl("/usuario/login/process")
+            .loginProcessingUrl("/login")
         )
 			// .formLogin(Customizer.withDefaults())
-			.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login"));
+			.logout(logout -> logout.logoutUrl("/login").logoutSuccessUrl("/login"));
 
 
         return http.build();

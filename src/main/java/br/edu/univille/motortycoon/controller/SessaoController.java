@@ -1,7 +1,11 @@
 package br.edu.univille.motortycoon.controller;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,8 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.univille.motortycoon.entity.Cargo;
 import br.edu.univille.motortycoon.entity.Usuario;
 import br.edu.univille.motortycoon.repository.UsuarioRepository;
 import br.edu.univille.motortycoon.service.PagamentoService;
@@ -30,43 +36,58 @@ public class SessaoController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping()
-    public ModelAndView login() {
-        ModelAndView mv = new ModelAndView("sessao/login");
+    public ModelAndView index() {
+        var mv = new ModelAndView("sessao/login");
+        return mv;
+    }
+
+    @PostMapping()
+    public ModelAndView login(@RequestParam String email, @RequestParam String senha) {
+        
+        try {            
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, senha)
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return new ModelAndView("redirect:/home"); // Redireciona para a página inicial após login
+        } catch (Exception e) {
+            // redirectAttributes.addFlashAttribute("error", "Usuário ou senha inválidos!");
+            return new ModelAndView("redirect:/sessao/login"); // Volta para a tela de login com mensagem de erro
+        }
         return mv;
     }
 
     @GetMapping("/registrar")
-    public ModelAndView register() {
-        ModelAndView mv = new ModelAndView("sessao/register");
+    public ModelAndView registrar() {
+        var mv = new ModelAndView("sessao/registrar");
         mv.addObject("elemento", new Usuario());
         return mv;
     }
 
-    // Processar registro de usuário
-    @PostMapping("/register")
-    public ModelAndView processRegister(@ModelAttribute Usuario usuario) {
-        ModelAndView mv = new ModelAndView("register");
+    @PostMapping("/registrar")
+    public ModelAndView processRegister(@ModelAttribute("usuario") Usuario usuario) {
+        var mv = new ModelAndView("sessao/registrar");
 
-        if (usuarioRepository.findByUsername(usuario.getUsername()) != null) {
+        if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
             mv.addObject("error", "Usuário já existe!");
             return mv;
         }
 
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        usuario.setRole("USER");
-        userRepository.save(usuario);
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        // usuario.setCargo(Cargo.USER);
+        usuarioRepository.save(usuario);
 
         mv.setViewName("redirect:/usuario/login");
         return mv;
     }
 
-    // Página inicial após login
-    @GetMapping("/home")
-    public ModelAndView home(Principal principal) {
-        ModelAndView mav = new ModelAndView("home");
-        User usuario = userRepository.findByUsername(principal.getName());
-        mav.addObject("username", usuario.getUsername());
-        mav.addObject("role", usuario.getRole());
-        return mav;
-    }
+    // @GetMapping("/home")
+    // public ModelAndView home(Principal principal) {
+    //     ModelAndView mav = new ModelAndView("home");
+    //     User usuario = userRepository.findByUsername(principal.getName());
+    //     mav.addObject("username", usuario.getUsername());
+    //     mav.addObject("role", usuario.getRole());
+    //     return mav;
+    // }
 }

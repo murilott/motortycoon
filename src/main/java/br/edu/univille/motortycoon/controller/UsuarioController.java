@@ -40,25 +40,6 @@ public class UsuarioController {
         return mv;
     }
 
-    @GetMapping
-    @RequestMapping("/login")
-    public ModelAndView login(){
-        var mv = new ModelAndView("usuario/login");
-        mv.addObject("lista", service.obterTodos());
-        mv.addObject("usuario", new Usuario());
-        return mv;
-    }
-
-    @GetMapping
-    @RequestMapping("/registrar")
-    public ModelAndView novo(){
-        var mv = new ModelAndView("usuario/novo");
-        mv.addObject("elemento", new Usuario());
-        mv.addObject("listaPagamento", pagamentoService.obterTodos());
-
-        return mv;
-    }
-
     @PostMapping
     @RequestMapping("/salvar")
     public ModelAndView salvarNovo(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
