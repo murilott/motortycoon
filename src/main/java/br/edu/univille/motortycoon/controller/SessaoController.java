@@ -3,6 +3,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.univille.motortycoon.entity.Cargo;
 import br.edu.univille.motortycoon.entity.Usuario;
@@ -24,6 +26,7 @@ import br.edu.univille.motortycoon.repository.UsuarioRepository;
 import br.edu.univille.motortycoon.service.PagamentoService;
 import br.edu.univille.motortycoon.service.UsuarioService;
 import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping("/login")
@@ -35,14 +38,17 @@ public class SessaoController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @GetMapping()
     public ModelAndView index() {
         var mv = new ModelAndView("sessao/login");
         return mv;
     }
 
-    @PostMapping()
-    public ModelAndView login(@RequestParam String email, @RequestParam String senha) {
+    @PostMapping("/entrar")
+    public ModelAndView login(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
         
         try {            
             Authentication authentication = authenticationManager.authenticate(
@@ -52,10 +58,9 @@ public class SessaoController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return new ModelAndView("redirect:/home"); // Redireciona para a página inicial após login
         } catch (Exception e) {
-            // redirectAttributes.addFlashAttribute("error", "Usuário ou senha inválidos!");
-            return new ModelAndView("redirect:/sessao/login"); // Volta para a tela de login com mensagem de erro
+            redirectAttributes.addFlashAttribute("error", "Usuário ou senha inválidos!");
+            return new ModelAndView("redirect:/home"); // Volta para a tela de login com mensagem de erro
         }
-        return mv;
     }
 
     @GetMapping("/registrar")
