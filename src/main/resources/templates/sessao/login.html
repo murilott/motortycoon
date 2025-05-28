@@ -19,6 +19,9 @@
         <div th:if="${param.logout}">
             Você deslogou.
         </div>
+        <div th:if="${param.register}">
+            Usuário cadastrado com sucesso.
+        </div>
 
         <form th:action="@{/login/entrar}" method="post">
             <div>

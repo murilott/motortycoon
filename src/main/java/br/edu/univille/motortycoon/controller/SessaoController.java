@@ -49,7 +49,6 @@ public class SessaoController {
 
     @PostMapping("/entrar")
     public ModelAndView login(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
-        
         try {            
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, senha)
@@ -59,7 +58,7 @@ public class SessaoController {
             return new ModelAndView("redirect:/home"); // Redireciona para a página inicial após login
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Usuário ou senha inválidos!");
-            return new ModelAndView("redirect:/home"); // Volta para a tela de login com mensagem de erro
+            return new ModelAndView("redirect:/usuario/login"); // Volta para a tela de login com mensagem de erro
         }
     }
 
@@ -71,28 +70,39 @@ public class SessaoController {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView processRegister(@ModelAttribute("usuario") Usuario usuario) {
-        var mv = new ModelAndView("sessao/registrar");
+    public ModelAndView processRegister(@ModelAttribute("elemento") Usuario usuario, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+        try {
+            if ( bindingResult.hasErrors() ) {
+                var mv = new ModelAndView("sessao/registrar");
+                mv.addObject("elemento", usuario);
+                mv.addObject("erro", "Caiu no binding");
 
-        if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
-            mv.addObject("error", "Usuário já existe!");
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                for (FieldError error : errors ) {
+                    mv.addObject("erroBinding", error.getObjectName() + " - " + error.getDefaultMessage());
+                }
+
+                return mv;
+            }
+                
+            // if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
+            //     var mv = new ModelAndView("sessao/registrar");
+            //     mv.addObject("elemento", usuario);
+            //     mv.addObject("erro", "Usuário já existe!");
+            //     return mv;
+            // }
+
+            usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+            // usuario.setCargo(Cargo.USER);
+            usuarioRepository.save(usuario);
+            redirectAttributes.addFlashAttribute("register", "Usuário cadastrado com sucesso.");
+
+            return new ModelAndView("redirect:/sessao/login"); 
+        } catch (Exception e){
+            var mv = new ModelAndView("sessao/registrar");
+            mv.addObject("elemento", usuario);
+            mv.addObject("erro", e.getMessage());
             return mv;
         }
-
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        // usuario.setCargo(Cargo.USER);
-        usuarioRepository.save(usuario);
-
-        mv.setViewName("redirect:/usuario/login");
-        return mv;
     }
-
-    // @GetMapping("/home")
-    // public ModelAndView home(Principal principal) {
-    //     ModelAndView mav = new ModelAndView("home");
-    //     User usuario = userRepository.findByUsername(principal.getName());
-    //     mav.addObject("username", usuario.getUsername());
-    //     mav.addObject("role", usuario.getRole());
-    //     return mav;
-    // }
 }

@@ -10,7 +10,7 @@ public enum Cargo {
         this.cargo = cargo;
     }
 
-    public String getValue() {
+    public String getNome() {
         return cargo;
     }
 }
