@@ -54,12 +54,15 @@ public class SessaoController {
                 new UsernamePasswordAuthenticationToken(email, senha)
             );
 
+            // https://copilot.microsoft.com/chats/eHoVERaGBUwU12MAZ1wq4
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return new ModelAndView("redirect:/home"); // Redireciona para a página inicial após login
         } catch (Exception e) {
             var mv = new ModelAndView("/usuario/login");
             redirectAttributes.addFlashAttribute("erro", "Usuário ou senha inválidos!");
             mv.addObject("erro", e.getMessage());
+            mv.addObject("erro", "caiu no erro");
             return mv; 
         }
     }
