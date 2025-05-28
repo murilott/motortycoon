@@ -57,8 +57,10 @@ public class SessaoController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return new ModelAndView("redirect:/home"); // Redireciona para a página inicial após login
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Usuário ou senha inválidos!");
-            return new ModelAndView("redirect:/usuario/login"); // Volta para a tela de login com mensagem de erro
+            var mv = new ModelAndView("/usuario/login");
+            redirectAttributes.addFlashAttribute("erro", "Usuário ou senha inválidos!");
+            mv.addObject("erro", e.getMessage());
+            return mv; 
         }
     }
 

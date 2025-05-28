@@ -13,6 +13,9 @@
             <h2>Faça login no sistema</h2>
         </div>
 
+        <div th:if="${error}">
+            Nome ou senha inválidos.
+        </div>
         <div th:if="${param.error}">
             Nome ou senha inválidos.
         </div>
