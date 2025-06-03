@@ -21,7 +21,7 @@ public class ItemCarrinho {
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrinho_id")
     private Carrinho carrinho;
-    private long custo;
+    private double custo;
     private int quantidade;
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id")

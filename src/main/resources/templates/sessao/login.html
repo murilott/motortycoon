@@ -44,6 +44,7 @@
             <a th:href="@{/login/registrar}">Registre-se</a>
         </form>
 
+        <p class="usuario" th:if="${user != null}" th:text="${user}"></p>
         <p th:if="${erro != null}" th:text="${erro}"></p>
         <p th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
     </body>

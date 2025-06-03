@@ -39,7 +39,7 @@ public class SecurityConfig implements WebMvcConfigurer {
             .passwordParameter("senha")
             .loginPage("/login")
             // .failureUrl("/usuario/login?failed")
-            .loginProcessingUrl("/login")
+            // .loginProcessingUrl("/login")
         )
 			// .formLogin(Customizer.withDefaults())
 			.logout(logout -> logout.logoutUrl("/login").logoutSuccessUrl("/login"));

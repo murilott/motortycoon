@@ -78,7 +78,7 @@
             <button id="btnSalvar" type="submit">Salvar</button>
         </form>
 
-        <p th:if="${erro != null}" th:text="${erro}"></p>
-        <p th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
+        <p class="error" th:if="${erro != null}" th:text="${erro}"></p>
+        <p class="errorBinding" th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
     </body>
 </html>

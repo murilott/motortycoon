@@ -48,6 +48,14 @@ public class UsuarioService {
         repository.save(usuario);
     }
 
+    public Usuario logar(String email, String senha) {
+        Usuario usuario = repository.findByEmail(email).orElse(null);
+        if (usuario != null && passwordEncoder.matches(senha, usuario.getSenha())) {
+            return usuario; // Autenticado com sucesso
+        }
+        return null; // Falha na autenticação
+    
+
     // public Usuario registrar(String email, String senha) {
     //     Usuario usuario = new Usuario();
     //     usuario.setEmail(email);

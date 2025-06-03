@@ -34,6 +34,9 @@ public class SessaoController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+        
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -49,23 +52,45 @@ public class SessaoController {
 
     @PostMapping("/entrar")
     public ModelAndView login(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
-        try {            
-            Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, senha)
-            );
+        Usuario authenticatedUser = usuarioService.logar(email, senha);
+            if (authenticatedUser != null) {
+                var mv = new ModelAndView("/usuario/login");
+                mv.addObject("user", authenticatedUser.getNomeCompleto());
+                return mv;
+            } else {
+                    var mv = new ModelAndView("/usuario/login");
+                mv.addObject("error", "Email ou senha inválidos");
+                return mv;
+            }
+        
+        // try {            
+        //     Authentication authentication = authenticationManager.authenticate(
+        //         new UsernamePasswordAuthenticationToken(email, senha)
+        //     );
 
-            // https://copilot.microsoft.com/chats/eHoVERaGBUwU12MAZ1wq4
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            return new ModelAndView("redirect:/home"); // Redireciona para a página inicial após login
-        } catch (Exception e) {
-            var mv = new ModelAndView("/usuario/login");
-            redirectAttributes.addFlashAttribute("erro", "Usuário ou senha inválidos!");
-            mv.addObject("erro", e.getMessage());
-            mv.addObject("erro", "caiu no erro");
-            return mv; 
-        }
+        //     SecurityContextHolder.getContext().setAuthentication(authentication);
+        //     return new ModelAndView("redirect:/home");
+        // } catch (Exception e) {
+        //     var mv = new ModelAndView("/usuario/login");
+        //     redirectAttributes.addFlashAttribute("erro", "Usuário ou senha inválidos!");
+        //     mv.addObject("erro", e.getMessage());
+        //     mv.addObject("erro", "caiu no erro");
+        //     return mv; 
+        // }
     }
+
+    // @PostMapping
+    // public String login(@ModelAttribute("user") User user, Model model) {
+    //     User authenticatedUser = userService.authenticate(user.getEmail(), user.getSenha());
+    //     if (authenticatedUser != null) {
+    //         model.addAttribute("user", authenticatedUser);
+    //         return "redirect:/dashboard";
+    //     } else {
+    //         model.addAttribute("error", "Email ou senha inválidos");
+    //         return "login";
+    //     }
+    // }
+
 
     @GetMapping("/registrar")
     public ModelAndView registrar() {
