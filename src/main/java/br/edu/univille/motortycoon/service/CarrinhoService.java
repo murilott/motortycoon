@@ -27,8 +27,8 @@ public class CarrinhoService {
         return repository.findAll();
     }
 
-    public void salvar(Carrinho Carrinho) {
-        repository.save(Carrinho);
+    public Carrinho salvar(Carrinho Carrinho) {
+        return repository.save(Carrinho);
     }
 
     public void excluir(Carrinho Carrinho) {

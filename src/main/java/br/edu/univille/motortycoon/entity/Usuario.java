@@ -40,9 +40,9 @@ public class Usuario implements UserDetails {
     private String cargo;
     @ManyToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
     private List<Pagamento> formaPagamento;
-    @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrinhoAtual_id")
-    private ItemCarrinho carrinhoAtual;
+    private Carrinho carrinhoAtual;
     @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ItemCarrinho> historico;
 

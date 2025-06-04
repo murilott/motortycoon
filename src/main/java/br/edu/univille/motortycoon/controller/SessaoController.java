@@ -22,8 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.univille.motortycoon.entity.Cargo;
+import br.edu.univille.motortycoon.entity.Carrinho;
 import br.edu.univille.motortycoon.entity.Usuario;
 import br.edu.univille.motortycoon.repository.UsuarioRepository;
+import br.edu.univille.motortycoon.service.CarrinhoService;
 import br.edu.univille.motortycoon.service.PagamentoService;
 import br.edu.univille.motortycoon.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -38,6 +40,9 @@ public class SessaoController {
         
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private CarrinhoService carrinhoService;
 
     @Autowired
     private PagamentoService pagamentoService;
@@ -71,6 +76,7 @@ public class SessaoController {
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("sessao/registrar");
                 mv.addObject("elemento", usuario);
+                mv.addObject("listaPagamento", pagamentoService.obterTodos());
                 mv.addObject("erro", "Caiu no binding");
 
                 List<FieldError> errors = bindingResult.getFieldErrors();
@@ -88,13 +94,22 @@ public class SessaoController {
                 return mv;
             }
 
+            
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-            usuarioRepository.save(usuario);
+            
+            Carrinho carrinho = new Carrinho();
+            carrinho.setUsuario(usuario);
+            usuario.setCarrinhoAtual(carrinho);
+            
+            usuario = usuarioService.salvar(usuario);
+            carrinhoService.salvar(carrinho);
+
 
             return new ModelAndView("redirect:/login?registered"); 
         } catch (Exception e){
             var mv = new ModelAndView("sessao/registrar");
             mv.addObject("elemento", usuario);
+            mv.addObject("listaPagamento", pagamentoService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;
         }

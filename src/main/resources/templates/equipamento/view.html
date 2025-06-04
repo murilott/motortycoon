@@ -21,10 +21,10 @@
 
         <form th:action="@{/carrinho/adicionar}" th:object="${itemCarrinho}" method="post">
             <div>
-                <label>Id carrinho</label>
+                <!-- <label>Id carrinho</label>
                 <td><input readonly type="text" th:field="*{carrinho.id}"></td>
                 <label>Id itemCarrinho</label>
-                <td><input readonly type="text" th:field="*{id}"></td>
+                <td><input readonly type="text" th:field="*{id}"></td> -->
                 <label>Id produto</label>
                 <td><input readonly type="text" th:field="*{produto.id}"></td>
             </div>
@@ -37,7 +37,7 @@
                 <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Erro de quantidade</p>
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="carrinho">Carrinho</label>
 
                 <select name="carrinho" id="carrinho" th:field="*{carrinho}">
@@ -46,11 +46,16 @@
                         th:text="${carrinho.nome}">
                     </option>
                 </select>            
-            </div>
+            </div> -->
             
             <button id="btnSalvar" type="submit">Adicionar ao carrinho</button>
         </form>
 
-        <p th:if="${erro != null}" th:text="${erro}"></p>
+        <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
+        <p th:if="${erro}" th:text="${erro}">
+            Erro
+        </p>
+        <p th:if="${produto}" th:text="${produto}">
+        </p>
     </body>
 </html>

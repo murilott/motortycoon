@@ -18,6 +18,9 @@ public class Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
     private float custoTotal;
     @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ItemCarrinho> itens;

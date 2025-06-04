@@ -32,8 +32,8 @@ public class UsuarioService {
         return repository.findAll();
     }
     
-    public void salvar(Usuario usuario) {
-        repository.save(usuario);
+    public Usuario salvar(Usuario usuario) {
+        return repository.save(usuario);
     }
 
     public void excluir(Usuario usuario) {
