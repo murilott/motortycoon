@@ -20,9 +20,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public Optional<Usuario> obterPeloId(long id){
         return repository.findById(id);
     }
@@ -42,24 +39,4 @@ public class UsuarioService {
     public void excluir(Usuario usuario) {
         repository.delete(usuario);
     }
-
-    public void registrar(Usuario usuario) {
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));;
-        repository.save(usuario);
-    }
-
-    public Usuario logar(String email, String senha) {
-        Usuario usuario = repository.findByEmail(email).orElse(null);
-        if (usuario != null && passwordEncoder.matches(senha, usuario.getSenha())) {
-            return usuario; // Autenticado com sucesso
-        }
-        return null; // Falha na autenticação
-    }
-
-    // public Usuario registrar(String email, String senha) {
-    //     Usuario usuario = new Usuario();
-    //     usuario.setEmail(email);
-    //     usuario.setPassword(passwordEncoder.encode(password));
-    //     return repository.save(usuario);
-    // }
 }

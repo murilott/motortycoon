@@ -41,56 +41,14 @@ public class SessaoController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    // @Autowired
+    // private AuthenticationManager authenticationManager;
 
     @GetMapping()
     public ModelAndView index() {
         var mv = new ModelAndView("sessao/login");
         return mv;
     }
-
-    @PostMapping("/entrar")
-    public ModelAndView login(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
-        Usuario authenticatedUser = usuarioService.logar(email, senha);
-        var mv = new ModelAndView("home/index");
-        mv.addObject("erro", "Entrou no login");
-            if (authenticatedUser != null) {
-                mv.addObject("user", authenticatedUser.getNomeCompleto());
-                return mv;
-            } else {
-                mv.addObject("erro", "Email ou senha inválidos");
-                return mv;
-            }
-        
-        // try {            
-        //     Authentication authentication = authenticationManager.authenticate(
-        //         new UsernamePasswordAuthenticationToken(email, senha)
-        //     );
-
-        //     SecurityContextHolder.getContext().setAuthentication(authentication);
-        //     return new ModelAndView("redirect:/home");
-        // } catch (Exception e) {
-        //     var mv = new ModelAndView("/usuario/login");
-        //     redirectAttributes.addFlashAttribute("erro", "Usuário ou senha inválidos!");
-        //     mv.addObject("erro", e.getMessage());
-        //     mv.addObject("erro", "caiu no erro");
-        //     return mv; 
-        // }
-    }
-
-    // @PostMapping
-    // public String login(@ModelAttribute("user") User user, Model model) {
-    //     User authenticatedUser = userService.authenticate(user.getEmail(), user.getSenha());
-    //     if (authenticatedUser != null) {
-    //         model.addAttribute("user", authenticatedUser);
-    //         return "redirect:/dashboard";
-    //     } else {
-    //         model.addAttribute("error", "Email ou senha inválidos");
-    //         return "login";
-    //     }
-    // }
-
 
     @GetMapping("/registrar")
     public ModelAndView registrar() {
@@ -115,21 +73,15 @@ public class SessaoController {
                 return mv;
             }
 
-             if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
                 var mv = new ModelAndView("sessao/registrar");
                 mv.addObject("elemento", usuario);
                 mv.addObject("erro", "E-mail já está em uso!");
                 return mv;
             }
-                
-            // if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
-            //     
-            // }
 
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-            // usuario.setCargo(Cargo.USER);
             usuarioRepository.save(usuario);
-            // redirectAttributes.addFlashAttribute("register", "Usuário cadastrado com sucesso.");
 
             return new ModelAndView("redirect:/sessao/login?registered"); 
         } catch (Exception e){

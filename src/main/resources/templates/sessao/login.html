@@ -13,9 +13,6 @@
             <h2>Faça login no sistema</h2>
         </div>
 
-        <!-- <div th:if="${error}">
-            Nome ou senha inválidos.
-        </div> -->
         <div th:if="${param.error}">
             Nome ou senha inválidos.
         </div>
@@ -29,23 +26,17 @@
         <form th:action="@{/login}" method="post">
             <div>
                 <label for="email">Email:</label>
-
                 <input type="text" placeholder="Seu email" name="username">
             </div>
 
             <div>
                 <label for="senha">Senha</label>
-
                 <input type="text" placeholder="Sua senha" name="password">
             </div>
 
             <button id="btnSalvar" type="submit">Entrar</button>
-
             <a th:href="@{/login/registrar}">Registre-se</a>
+            <a th:href="@{/login/redefinir}">Esqueci a senha</a>
         </form>
-
-        <p class="usuario" th:if="${user != null}" th:text="${user}"></p>
-        <p th:if="${erro != null}" th:text="${erro}"></p>
-        <p th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
     </body>
 </html>

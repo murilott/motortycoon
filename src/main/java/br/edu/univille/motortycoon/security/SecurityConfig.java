@@ -57,11 +57,6 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public UserDetailsService userDetailsService(UsuarioRepository usuarioRepository) {
         return email -> usuarioRepository.findByEmail(email)
-            .map(user -> User.builder()
-                .username(user.getEmail())
-                .password(user.getSenha())
-                .roles("USER")
-                .build())
             .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
     }
 }

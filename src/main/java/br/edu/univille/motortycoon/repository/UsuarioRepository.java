@@ -8,6 +8,5 @@ import org.springframework.security.core.userdetails.UserDetails;
 import br.edu.univille.motortycoon.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    // UserDetails findByEmail(String email);
     Optional<Usuario> findByEmail(String email);
 }

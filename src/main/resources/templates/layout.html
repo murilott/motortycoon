@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br">  
+    <!-- xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security" -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,13 +25,16 @@
             </ul>
 
             <ul id="login">
-                <li>Bem vindo, <span  th:remove="tag" sec:authentication="email"></span></li>
+                <li  th:if="${#authorization.expression('isAuthenticated()')}">Bem vindo, <span th:text="${#authentication.principal.nomeCompleto}"></span>
+                    <span th:text="${#authentication.authorities}"></span>
+                </li>
 
-                <li><a th:href="@{/login/registrar}">Cadastrar</a></li>
-                <li><a th:href="@{/login}">Login</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login/redefinir}">Mudar senha</a></li>
+                <li th:unless="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login/registrar}">Cadastrar</a></li>
+                <li th:unless="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login}">Login</a></li>
 
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sair"/>
+                <form th:action="@{/logout}" method="post" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <button type="submit">Sair</button>
                 </form>
             </ul>
         </div>
