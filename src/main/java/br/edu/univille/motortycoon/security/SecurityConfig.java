@@ -29,16 +29,16 @@ public class SecurityConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+    // @Bean
+    // public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    //     return authenticationConfiguration.getAuthenticationManager();
+    // }
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
         .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login/registrar", "/login", "/").permitAll()
+                .requestMatchers("/login/registrar", "/login/redefinir", "/login", "/").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

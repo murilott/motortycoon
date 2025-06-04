@@ -1,6 +1,7 @@
 package br.edu.univille.motortycoon.controller;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,10 +40,10 @@ public class SessaoController {
     private UsuarioService usuarioService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PagamentoService pagamentoService;
 
-    // @Autowired
-    // private AuthenticationManager authenticationManager;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping()
     public ModelAndView index() {
@@ -54,6 +55,13 @@ public class SessaoController {
     public ModelAndView registrar() {
         var mv = new ModelAndView("sessao/registrar");
         mv.addObject("elemento", new Usuario());
+        mv.addObject("listaPagamento", pagamentoService.obterTodos());
+        return mv;
+    }
+
+    @GetMapping("/redefinir")
+    public ModelAndView redefinir() {
+        var mv = new ModelAndView("sessao/redefinir");
         return mv;
     }
 
@@ -83,10 +91,32 @@ public class SessaoController {
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
             usuarioRepository.save(usuario);
 
-            return new ModelAndView("redirect:/sessao/login?registered"); 
+            return new ModelAndView("redirect:/login?registered"); 
         } catch (Exception e){
             var mv = new ModelAndView("sessao/registrar");
             mv.addObject("elemento", usuario);
+            mv.addObject("erro", e.getMessage());
+            return mv;
+        }
+    
+    }
+
+    @PostMapping("/redefinir")
+    public ModelAndView redefinirSenha(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
+        try {
+            Optional<Usuario> usuarioOpt = usuarioService.obterPeloEmail(email); //.orElse(null)
+
+            if (usuarioOpt.isEmpty()) {
+                return new ModelAndView("redirect:/login/redefinir?email");
+            }
+
+            Usuario usuario = usuarioOpt.get();
+            usuario.setSenha(passwordEncoder.encode(senha));
+            usuarioRepository.save(usuario);
+
+            return new ModelAndView("redirect:/login?redefined"); 
+        } catch (Exception e){
+            var mv = new ModelAndView("sessao/redefinir");
             mv.addObject("erro", e.getMessage());
             return mv;
         }

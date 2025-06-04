@@ -20,7 +20,10 @@
             Você deslogou.
         </div>
         <div th:if="${param.registered}">
-            Usuário cadastrado com sucesso.
+            Usuário registrado com sucesso.
+        </div>
+        <div th:if="${param.redefined}">
+            Senha redefinida com sucesso.
         </div>
 
         <form th:action="@{/login}" method="post">
