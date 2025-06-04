@@ -117,7 +117,7 @@ public class SessaoController {
     }
 
     @PostMapping("/redefinir")
-    public ModelAndView redefinirSenha(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
+    public ModelAndView redefinirSenha(@RequestParam("email") String email, @RequestParam("senha") String senha, RedirectAttributes redirectAttributes) {
         try {
             Optional<Usuario> usuarioOpt = usuarioService.obterPeloEmail(email); //.orElse(null)
 
