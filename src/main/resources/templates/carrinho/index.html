@@ -11,5 +11,34 @@
         <div>
             <h2>Itens do Carrinho</h2>
         </div>
+
+        <div>
+            <label for="cod">Código</label>
+            <p th:text="${carrinho.id}"></p>
+
+            <label for="cod">Custo total</label>
+            <p th:text="${carrinho.custoTotal}"></p>
+        </div>
+
+        <h3>Itens do Carrinho</h3>
+
+        <table th:if="${carrinho}">
+            <tr>
+                <th>Código</th>
+                <th>Custo</th>
+                <th>Quantidade</th>
+                <th>Produto</th>
+                <th>Categoria</th>
+                <th>Imagem</th>
+              </tr>
+              <tr th:each="e : ${carrinho.itens}">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.custo}"></td>
+                <td th:text="${e.quantidade}"></td>
+                <td th:text="${e.produto.nome}"></td>
+                <td th:text="${e.produto.categoria}"></td>
+                <td><img th:src="${e.produto.imagem}" style="width:100px;"></td>
+              </tr>
+        </table>
     </body>
 </html>

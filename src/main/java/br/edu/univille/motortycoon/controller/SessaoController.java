@@ -98,11 +98,12 @@ public class SessaoController {
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
             
             Carrinho carrinho = new Carrinho();
+            carrinhoService.salvar(carrinho);
+            
             carrinho.setUsuario(usuario);
             usuario.setCarrinhoAtual(carrinho);
             
             usuario = usuarioService.salvar(usuario);
-            carrinhoService.salvar(carrinho);
 
 
             return new ModelAndView("redirect:/login?registered"); 

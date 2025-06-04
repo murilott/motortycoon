@@ -24,4 +24,15 @@ public class Carrinho {
     private float custoTotal;
     @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ItemCarrinho> itens;
+
+    @Override
+public String toString() {
+    return "Carrinho [id=" + id 
+        + ", usuarioId=" + (usuario != null ? usuario.getId() : "null")
+        + ", custoTotal=" + custoTotal 
+        + ", itensCount=" + (itens != null ? itens.size() : 0) 
+        + "]";
+}
+
+    
 }

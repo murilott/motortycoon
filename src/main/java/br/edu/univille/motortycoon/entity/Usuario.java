@@ -40,12 +40,13 @@ public class Usuario implements UserDetails {
     private String cargo;
     @ManyToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
     private List<Pagamento> formaPagamento;
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @OneToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrinhoAtual_id")
     private Carrinho carrinhoAtual;
     @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ItemCarrinho> historico;
 
+    
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,4 +67,19 @@ public class Usuario implements UserDetails {
     @Override public boolean isAccountNonLocked() { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return true; }
+
+    @Override
+public String toString() {
+    return "Usuario [id=" + id 
+           + ", nomeCompleto=" + nomeCompleto 
+           + ", email=" + email 
+           + ", dataNascimento=" + dataNascimento 
+           + ", endereco=" + endereco 
+           + ", cpf=" + cpf 
+           + ", cargo=" + cargo
+           + ", formaPagamentoCount=" + (formaPagamento != null ? formaPagamento.size() : 0)
+           + ", carrinhoAtualId=" + (carrinhoAtual != null ? carrinhoAtual.getId() : "null")
+           + ", historicoCount=" + (historico != null ? historico.size() : 0)
+           + "]";
+}
 }

@@ -19,6 +19,7 @@ import br.edu.univille.motortycoon.entity.ItemCarrinho;
 import br.edu.univille.motortycoon.entity.Usuario;
 import br.edu.univille.motortycoon.service.CarrinhoService;
 import br.edu.univille.motortycoon.service.EquipamentoService;
+import br.edu.univille.motortycoon.service.ItemCarrinhoService;
 import br.edu.univille.motortycoon.service.UsuarioService;
 import jakarta.validation.Valid;
 
@@ -29,15 +30,22 @@ public class CarrinhoController {
     private CarrinhoService service;
 
     @Autowired
+    private ItemCarrinhoService itemCarrinhoService;
+
+    @Autowired
     private EquipamentoService equipamentoService;
 
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping
-    public ModelAndView index(){
+    public ModelAndView index(Principal principal){
+        String email = principal.getName();
+        Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
+        Carrinho carrinho = usuario.getCarrinhoAtual();
+
         var mv = new ModelAndView("carrinho/index");
-        mv.addObject("lista", service.obterTodos());
+        mv.addObject("carrinho", carrinho);
         return mv;
     }
 
@@ -56,13 +64,14 @@ public class CarrinhoController {
             String email = principal.getName();
             Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
             Carrinho carrinho = usuario.getCarrinhoAtual();
-
+            item = itemCarrinhoService.salvar(item);
+            
             // Equipamento equipamento = equipamentoService.obterPeloId(item.getProduto().getId()).orElseThrow();
             // Carrinho carrinho = service.obterPeloId(item.getCarrinho().getId()).orElse(null);
 
             // if (carrinho == null) {
-            //     carrinho = new Carrinho();
-            //     service.salvar(carrinho);
+                //     carrinho = new Carrinho();
+                //     service.salvar(carrinho);
             // }
             
             if ( bindingResult.hasErrors() ) {
@@ -76,7 +85,8 @@ public class CarrinhoController {
             // item.setCarrinho(carrinho);
             carrinho.getItens().add(item);
             item.setCarrinho(carrinho);
-
+            
+            
             service.salvar(carrinho);
             return new ModelAndView("redirect:/carrinho");
         }catch (Exception e){

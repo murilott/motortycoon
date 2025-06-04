@@ -20,7 +20,7 @@
                 <li>Nome: <span th:text="${e.nome}"></span> </li>
                 <li>Custo: <span th:text="${e.custo}"></span> </li>
                 <li>Estoque: <span th:text="${e.estoque}"></span> </li>
-                <li>Categoria: <span th:text="${e.categoria.nome}"></span> </li>
+                <li>Categoria: <span th:text="${e.categoria}"></span> </li>
                 <a th:href="@{equipamento/view/{id}(id=${e.id})}">Comprar</a>
             </ul>
         </div>

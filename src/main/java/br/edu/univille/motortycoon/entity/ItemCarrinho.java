@@ -23,7 +23,7 @@ public class ItemCarrinho {
     private Carrinho carrinho;
     private double custo;
     private int quantidade;
-    @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id")
     private Equipamento produto;
 }
