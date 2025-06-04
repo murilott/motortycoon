@@ -53,13 +53,13 @@ public class SessaoController {
     @PostMapping("/entrar")
     public ModelAndView login(@RequestParam String email, @RequestParam String senha, RedirectAttributes redirectAttributes) {
         Usuario authenticatedUser = usuarioService.logar(email, senha);
+        var mv = new ModelAndView("home/index");
+        mv.addObject("erro", "Entrou no login");
             if (authenticatedUser != null) {
-                var mv = new ModelAndView("/usuario/login");
                 mv.addObject("user", authenticatedUser.getNomeCompleto());
                 return mv;
             } else {
-                    var mv = new ModelAndView("/usuario/login");
-                mv.addObject("error", "Email ou senha inválidos");
+                mv.addObject("erro", "Email ou senha inválidos");
                 return mv;
             }
         
@@ -114,20 +114,24 @@ public class SessaoController {
 
                 return mv;
             }
+
+             if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+                var mv = new ModelAndView("sessao/registrar");
+                mv.addObject("elemento", usuario);
+                mv.addObject("erro", "E-mail já está em uso!");
+                return mv;
+            }
                 
             // if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
-            //     var mv = new ModelAndView("sessao/registrar");
-            //     mv.addObject("elemento", usuario);
-            //     mv.addObject("erro", "Usuário já existe!");
-            //     return mv;
+            //     
             // }
 
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
             // usuario.setCargo(Cargo.USER);
             usuarioRepository.save(usuario);
-            redirectAttributes.addFlashAttribute("register", "Usuário cadastrado com sucesso.");
+            // redirectAttributes.addFlashAttribute("register", "Usuário cadastrado com sucesso.");
 
-            return new ModelAndView("redirect:/sessao/login"); 
+            return new ModelAndView("redirect:/sessao/login?registered"); 
         } catch (Exception e){
             var mv = new ModelAndView("sessao/registrar");
             mv.addObject("elemento", usuario);

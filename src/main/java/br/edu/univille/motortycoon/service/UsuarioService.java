@@ -54,7 +54,7 @@ public class UsuarioService {
             return usuario; // Autenticado com sucesso
         }
         return null; // Falha na autenticação
-    
+    }
 
     // public Usuario registrar(String email, String senha) {
     //     Usuario usuario = new Usuario();
