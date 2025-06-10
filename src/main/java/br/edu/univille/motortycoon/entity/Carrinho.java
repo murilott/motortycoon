@@ -37,8 +37,8 @@ public class Carrinho {
     public float calcularCustoTotal() {
         float soma = 0;
 
-        for (int i=0; i<itens.size(); i++) {
-            ItemCarrinho item = itens.get(i);
+        for (int i=0; i<this.itens.size(); i++) {
+            ItemCarrinho item = this.itens.get(i);
             soma += item.getCusto();
         }
 

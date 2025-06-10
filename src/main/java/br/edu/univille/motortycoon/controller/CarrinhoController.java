@@ -64,16 +64,21 @@ public class CarrinhoController {
             String email = principal.getName();
             Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
             Carrinho carrinho = usuario.getCarrinhoAtual();
-            item = itemCarrinhoService.salvar(item);
-            
-            // Equipamento equipamento = equipamentoService.obterPeloId(item.getProduto().getId()).orElseThrow();
-            // Carrinho carrinho = service.obterPeloId(item.getCarrinho().getId()).orElse(null);
 
-            // if (carrinho == null) {
-                //     carrinho = new Carrinho();
-                //     service.salvar(carrinho);
-            // }
-            
+            if ( item.getQuantidade() <= 0 ) {
+                long id = item.getProduto().getId();
+                var mv = new ModelAndView("redirect:/equipamento/view/" + id + "?quantidadeMenor");
+                mv.addObject("elemento", item);
+                return mv;
+            }
+
+            if ( item.getQuantidade() > item.getProduto().getEstoque() ) {
+                long id = item.getProduto().getId();
+                var mv = new ModelAndView("redirect:/equipamento/view/" + id + "?quantidadeEstoque");
+                mv.addObject("elemento", item);
+                return mv;
+            }
+
             if ( bindingResult.hasErrors() ) {
                 long id = item.getProduto().getId();
                 var mv = new ModelAndView("redirect:/equipamento/view/" + id);
@@ -81,12 +86,19 @@ public class CarrinhoController {
                 return mv;
             }
             
-            // item.setProduto(equipamento);
-            // item.setCarrinho(carrinho);
+            item = itemCarrinhoService.salvar(item);
+
             carrinho.getItens().add(item);
+
             item.setCarrinho(carrinho);
-            
-            
+            item.setCusto(item.calcularCusto());
+
+            carrinho.setCustoTotal(carrinho.calcularCustoTotal());
+
+            Equipamento produto = equipamentoService.obterPeloId(item.getProduto().getId()).get();
+            produto.setEstoque(produto.getEstoque() - item.getQuantidade());
+            equipamentoService.salvar(produto);
+
             service.salvar(carrinho);
             return new ModelAndView("redirect:/carrinho");
         }catch (Exception e){

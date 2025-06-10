@@ -27,7 +27,10 @@ public class ItemCarrinho {
     @JoinColumn(name = "produto_id")
     private Equipamento produto;
 
-    public float calculaCusto() {
-        return produto.getCusto() * quantidade;
+    public float calcularCusto() {
+        System.out.println("item " + this.produto);
+        System.out.println("Custo " + this.produto.getCusto());
+        System.out.println("QUANTIDADE: " + this.quantidade);
+        return this.produto.getCusto() * this.quantidade;
     }
 }

@@ -21,14 +21,20 @@
 
         <form th:action="@{/carrinho/adicionar}" th:object="${itemCarrinho}" method="post">
             <div>
-                <!-- <label>Id carrinho</label>
-                <td><input readonly type="text" th:field="*{carrinho.id}"></td>
-                <label>Id itemCarrinho</label>
-                <td><input readonly type="text" th:field="*{id}"></td> -->
-                <label>Id produto</label>
-                <td><input readonly type="text" th:field="*{produto.id}"></td>
+                <input readonly hidden type="text" th:field="*{produto.id}">
+                <input readonly hidden type="text" th:field="*{produto.nome}">
+                <input readonly hidden type="text" th:field="*{produto.custo}">
+                <input readonly hidden type="text" th:field="*{produto.estoque}">
+                <input readonly hidden type="text" th:field="*{produto.categoria}">
+                <input readonly hidden type="text" th:field="*{produto.imagem}">
             </div>
-            <!-- <td><input readonly type="hidden" th:field="*{produto.id}"></td> -->
+            
+            <div th:if="${param.quantidadeMenor}">
+                Selecione pelo menos uma unidade.
+            </div>
+            <div th:if="${param.quantidadeEstoque}">
+                Quantidade selecionada excede o estoque.
+            </div>
 
             <div>
                 <label for="quantidade">Quantidade</label>
@@ -36,26 +42,12 @@
                 <input type="number" placeholder="Quantidade:" th:field="*{quantidade}">
                 <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Erro de quantidade</p>
             </div>
-
-            <!-- <div>
-                <label for="carrinho">Carrinho</label>
-
-                <select name="carrinho" id="carrinho" th:field="*{carrinho}">
-                    <option th:each="carrinho : ${listaCarrinho}"
-                        th:value="${carrinho.id}"
-                        th:text="${carrinho.nome}">
-                    </option>
-                </select>            
-            </div> -->
-            
+ 
             <button id="btnSalvar" type="submit">Adicionar ao carrinho</button>
         </form>
 
-        <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
         <p th:if="${erro}" th:text="${erro}">
             Erro
-        </p>
-        <p th:if="${produto}" th:text="${produto}">
         </p>
     </body>
 </html>

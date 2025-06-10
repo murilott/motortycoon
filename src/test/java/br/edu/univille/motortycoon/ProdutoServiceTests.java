@@ -48,12 +48,12 @@ public class ProdutoServiceTests {
         equipamento = equipamentoService.salvar(equipamento);
 
         // Verificar se o produto foi salvo corretamente
-        assertNotNull(equipamento);
-        assertEquals("Capacete", equipamento.getNome());
+        assertNotNull(equipamento, "Equipamento não salvo");
+        assertEquals("Capacete", equipamento.getNome(), "nome errado");
         assertEquals(10, equipamento.getEstoque());
         assertEquals(50, equipamento.getCusto());
 
-        // Verificar se o método save foi chamado uma vez no mock
+        // Verificar se o método save foi chamado uma vez no mock e está salvo no repositório
         verify(equipamentoRepository, times(1)).save(equipamento);
     }
 }
