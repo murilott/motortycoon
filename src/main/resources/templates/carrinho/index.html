@@ -20,6 +20,14 @@
             <p th:text="${carrinho.custoTotal}"></p>
         </div>
 
+        <div th:if="${param.erro}">
+            Item não encontrado.
+        </div>
+
+        <div th:if="${param.sucesso}">
+            Item removido com sucesso.
+        </div>
+
         <h3>Itens do Carrinho</h3>
 
         <table th:if="${carrinho}">
@@ -38,6 +46,7 @@
                 <td th:text="${e.produto.nome}"></td>
                 <td th:text="${e.produto.categoria.nome}"></td>
                 <td><img th:src="${e.produto.imagem}" style="width:100px;"></td>
+                <td><a th:href="@{carrinho/remover/{id}(id=${e.id})}">Remover</a></td>
               </tr>
         </table>
     </body>

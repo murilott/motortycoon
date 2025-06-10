@@ -111,6 +111,35 @@ public class CarrinhoController {
             return mv;
         }
     }
+    
+    @PostMapping
+    @RequestMapping("/remover/{id}")
+    public ModelAndView remover(@PathVariable long id, Principal principal, RedirectAttributes redirectAttributes) {
+        String email = principal.getName();
+        Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
+        Carrinho carrinho = usuario.getCarrinhoAtual();
+
+        var opt = itemCarrinhoService.obterPeloId(id);
+    
+        if(opt.isPresent()) {
+            ItemCarrinho item = opt.get();
+
+            carrinho.getItens().remove(item);
+            // item.setCarrinho(null);
+            carrinho.setCustoTotal(carrinho.calcularCustoTotal());
+
+            Equipamento produto = equipamentoService.obterPeloId(item.getProduto().getId()).get();
+            produto.setEstoque(produto.getEstoque() + item.getQuantidade());
+            equipamentoService.salvar(produto);
+
+            itemCarrinhoService.excluir(item);
+            service.salvar(carrinho);
+            
+            return new ModelAndView("redirect:/carrinho?sucesso");
+        }
+
+        return new ModelAndView("redirect:/carrinho?erro");
+    }
 
     @PostMapping
     @RequestMapping("/salvar")
