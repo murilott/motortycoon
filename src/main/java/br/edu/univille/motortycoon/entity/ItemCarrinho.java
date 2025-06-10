@@ -26,4 +26,8 @@ public class ItemCarrinho {
     @ManyToOne(cascade = CascadeType.REFRESH) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id")
     private Equipamento produto;
+
+    public float calculaCusto() {
+        return produto.getCusto() * quantidade;
+    }
 }

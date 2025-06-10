@@ -26,13 +26,24 @@ public class Carrinho {
     private List<ItemCarrinho> itens;
 
     @Override
-public String toString() {
-    return "Carrinho [id=" + id 
-        + ", usuarioId=" + (usuario != null ? usuario.getId() : "null")
-        + ", custoTotal=" + custoTotal 
-        + ", itensCount=" + (itens != null ? itens.size() : 0) 
-        + "]";
-}
+    public String toString() {
+        return "Carrinho [id=" + id 
+            + ", usuarioId=" + (usuario != null ? usuario.getId() : "null")
+            + ", custoTotal=" + custoTotal 
+            + ", itensCount=" + (itens != null ? itens.size() : 0) 
+            + "]";
+    }
+
+    public float calcularCustoTotal() {
+        float soma = 0;
+
+        for (int i=0; i<itens.size(); i++) {
+            ItemCarrinho item = itens.get(i);
+            soma += item.getCusto();
+        }
+
+        return soma;
+    }
 
     
 }
