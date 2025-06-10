@@ -18,7 +18,7 @@ public class Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
     private float custoTotal;

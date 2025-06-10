@@ -94,17 +94,16 @@ public class SessaoController {
                 return mv;
             }
 
-            
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-            
+
             Carrinho carrinho = new Carrinho();
-            carrinhoService.salvar(carrinho);
+            carrinho = carrinhoService.salvar(carrinho);
+            
+            usuario.setCarrinhoAtual(carrinho);
+            usuario = usuarioService.salvar(usuario);
             
             carrinho.setUsuario(usuario);
-            usuario.setCarrinhoAtual(carrinho);
-            
-            usuario = usuarioService.salvar(usuario);
-
+            carrinhoService.salvar(carrinho);
 
             return new ModelAndView("redirect:/login?registered"); 
         } catch (Exception e){
