@@ -29,6 +29,7 @@
                 <td th:text="${e.estoque}"></td>
                 <td th:text="${e.categoria.nome}"></td>
                 <td><img th:src="${e.imagem}" style="width:100px;"></td>
+                <td><a th:href="@{equipamento/editar/{id}(id=${e.id})}">Editar</a></td>
               </tr>
         </table>
     </body>

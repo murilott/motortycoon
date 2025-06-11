@@ -71,24 +71,20 @@ public class SessaoController {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView processRegister(@ModelAttribute("elemento") Usuario usuario, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, BindingResult bindingResult) {
         try {
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("sessao/registrar");
+                usuario.setSenha(null);
                 mv.addObject("elemento", usuario);
                 mv.addObject("listaPagamento", pagamentoService.obterTodos());
-                mv.addObject("erro", "Caiu no binding");
-
-                List<FieldError> errors = bindingResult.getFieldErrors();
-                for (FieldError error : errors ) {
-                    mv.addObject("erroBinding", error.getObjectName() + " - " + error.getDefaultMessage());
-                }
-
+                
                 return mv;
             }
-
+            
             if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
                 var mv = new ModelAndView("sessao/registrar");
+                usuario.setSenha(null);
                 mv.addObject("elemento", usuario);
                 mv.addObject("erro", "E-mail já está em uso!");
                 return mv;

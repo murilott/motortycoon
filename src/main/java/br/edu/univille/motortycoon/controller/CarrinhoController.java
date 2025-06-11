@@ -114,7 +114,7 @@ public class CarrinhoController {
     
     @PostMapping
     @RequestMapping("/remover/{id}")
-    public ModelAndView remover(@PathVariable long id, Principal principal) {
+    public ModelAndView remover(@PathVariable("id") long id, Principal principal) {
         String email = principal.getName();
         Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
         Carrinho carrinho = usuario.getCarrinhoAtual();
