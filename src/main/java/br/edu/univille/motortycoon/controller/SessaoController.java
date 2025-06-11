@@ -1,5 +1,6 @@
 package br.edu.univille.motortycoon.controller;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +91,19 @@ public class SessaoController {
                 return mv;
             }
 
+            List<String> roles = usuario.getCargos();
+    
+            // Se não existir, adiciona o papel ADMIN
+            if (roles == null) {
+                roles = new ArrayList<>();
+            }
+            
+            if (!roles.contains("ROLE_USER")) {
+                roles.add("ROLE_USER");
+                roles.add("ROLE_ADMIN");
+            }
+            
+            usuario.setCargos(roles);  // Atualiza o usuário com a lista de papéis
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
             Carrinho carrinho = new Carrinho();

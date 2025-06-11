@@ -2,6 +2,7 @@ package br.edu.univille.motortycoon.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -49,10 +50,21 @@ public class Usuario implements UserDetails {
     private Carrinho carrinhoAtual;
     @OneToMany(mappedBy = "usuario", cascade = { CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true)
     private List<Carrinho> historico;
+
+    // @ManyToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE })
+    private List<String> cargos;  
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        
+        if (cargos != null) {
+            for (String cargo : cargos) {
+                authorities.add(new SimpleGrantedAuthority(cargo));
+            }
+        }
+        
+        return authorities;
     }
 
     @Override
