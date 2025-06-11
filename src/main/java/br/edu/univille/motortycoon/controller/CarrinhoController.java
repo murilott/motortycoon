@@ -153,16 +153,18 @@ public class CarrinhoController {
                 var mv = new ModelAndView("redirect:/carrinho?vazio");
                 return mv;
             }
-
+            
             usuario.getHistorico().add(carrinho);
-
+            
+            usuario.setCarrinhoAtual(null);
+            
             Carrinho NovoCarrinho = new Carrinho();
+            NovoCarrinho.setUsuario(usuario);
             NovoCarrinho = service.salvar(NovoCarrinho);
             
             usuario.setCarrinhoAtual(NovoCarrinho);
             usuario = usuarioService.salvar(usuario);
             
-            NovoCarrinho.setUsuario(usuario);
             service.salvar(NovoCarrinho);
 
             return new ModelAndView("redirect:/carrinho?finalizar");

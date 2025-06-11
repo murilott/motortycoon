@@ -108,7 +108,6 @@ public class SessaoController {
             return new ModelAndView("redirect:/login?registered"); 
         } catch (Exception e){
             var mv = new ModelAndView("sessao/registrar");
-            mv.addObject("elemento", usuario);
             mv.addObject("listaPagamento", pagamentoService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;

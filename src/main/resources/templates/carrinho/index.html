@@ -62,6 +62,6 @@
 
         <a th:href="@{carrinho/finalizar}">Finalizar compra</a>
 
-        <p th:if="${erro}" tx:text="${erro}"></p>
+        <p th:if="${erro != null}" tx:text="${erro}"></p>
     </body>
 </html>
