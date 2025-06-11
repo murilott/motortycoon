@@ -18,5 +18,6 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Nome não deve ficar em branco")
     private String nome;
 }

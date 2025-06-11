@@ -55,15 +55,8 @@
             <div>
                 <label for="cpf">CPF</label>
 
-                <input type="number" placeholder="CPF:" th:field="*{cpf}">
+                <input type="text" placeholder="CPF:" th:field="*{cpf}">
                 <p th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">Erro de CPF</p>
-            </div>
-
-            <div>
-                <label for="cargo">Cargo</label>
-
-                <input type="text" placeholder="Cargo:" th:field="*{cargo}">
-                <p th:if="${#fields.hasErrors('cargo')}" th:errors="*{cargo}">Erro de cargo</p>
             </div>
 
             <div>

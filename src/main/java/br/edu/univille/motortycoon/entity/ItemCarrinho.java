@@ -22,6 +22,8 @@ public class ItemCarrinho {
     @JoinColumn(name = "carrinho_id")
     private Carrinho carrinho;
     private double custo;
+    @Min(value = 1, message = "Estoque mínimo 1")
+    @NotBlank(message = "Quantidade não deve ficar em branco")
     private int quantidade;
     @ManyToOne(cascade = CascadeType.REFRESH) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id")

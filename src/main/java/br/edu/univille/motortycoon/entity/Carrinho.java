@@ -18,8 +18,8 @@ public class Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
-    @JoinColumn(name = "usuario_id")
+    @ManyToOne //(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_carrinho_usuario"))
     private Usuario usuario;
     private float custoTotal;
     @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
