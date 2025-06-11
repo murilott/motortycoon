@@ -43,8 +43,8 @@ public class Usuario implements UserDetails {
     @OneToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST }) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrinhoAtual_id")
     private Carrinho carrinhoAtual;
-    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<ItemCarrinho> historico;
+    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE })
+    private List<Carrinho> historico;
 
     
     

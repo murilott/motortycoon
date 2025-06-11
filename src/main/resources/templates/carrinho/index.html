@@ -14,10 +14,10 @@
 
         <div>
             <label for="cod">Código</label>
-            <p th:text="${carrinho.id}"></p>
+            <p th:text="${carrinho?.id}"></p>
 
             <label for="cod">Custo total</label>
-            <p th:text="${carrinho.custoTotal}"></p>
+            <p th:text="${carrinho?.custoTotal}"></p>
         </div>
 
         <div th:if="${param.erro}">
@@ -26,6 +26,14 @@
 
         <div th:if="${param.sucesso}">
             Item removido com sucesso.
+        </div>
+
+        <div th:if="${param.finalizar}">
+            Compra finalizada com sucesso.
+        </div>
+
+        <div th:if="${param.vazio}">
+            Carrinho vazio.
         </div>
 
         <h3>Itens do Carrinho</h3>
@@ -47,7 +55,13 @@
                 <td th:text="${e.produto.categoria.nome}"></td>
                 <td><img th:src="${e.produto.imagem}" style="width:100px;"></td>
                 <td><a th:href="@{carrinho/remover/{id}(id=${e.id})}">Remover</a></td>
-              </tr>
+            </tr>
         </table>
+
+        <br>
+
+        <a th:href="@{carrinho/finalizar}">Finalizar compra</a>
+
+        <p th:if="${erro}" tx:text="${erro}"></p>
     </body>
 </html>

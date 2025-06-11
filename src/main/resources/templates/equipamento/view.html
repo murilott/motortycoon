@@ -39,7 +39,7 @@
             <div>
                 <label for="quantidade">Quantidade</label>
 
-                <input type="number" placeholder="Quantidade:" th:field="*{quantidade}">
+                <input type="number" placeholder="Quantidade:" max="${produto.estoque}" th:field="*{quantidade}">
                 <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Erro de quantidade</p>
             </div>
  

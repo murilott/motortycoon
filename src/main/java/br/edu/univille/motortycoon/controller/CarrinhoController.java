@@ -114,7 +114,7 @@ public class CarrinhoController {
     
     @PostMapping
     @RequestMapping("/remover/{id}")
-    public ModelAndView remover(@PathVariable long id, Principal principal, RedirectAttributes redirectAttributes) {
+    public ModelAndView remover(@PathVariable long id, Principal principal) {
         String email = principal.getName();
         Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
         Carrinho carrinho = usuario.getCarrinhoAtual();
@@ -134,11 +134,43 @@ public class CarrinhoController {
 
             itemCarrinhoService.excluir(item);
             service.salvar(carrinho);
-            
+
             return new ModelAndView("redirect:/carrinho?sucesso");
         }
 
         return new ModelAndView("redirect:/carrinho?erro");
+    }
+
+    @PostMapping
+    @RequestMapping("/finalizar")
+    public ModelAndView finalizarCompra(Principal principal) {
+        try {
+            String email = principal.getName();
+            Usuario usuario = usuarioService.obterPeloEmail(email).orElse(null);
+            Carrinho carrinho = usuario.getCarrinhoAtual();
+
+            if ( carrinho.getItens().isEmpty() ) {
+                var mv = new ModelAndView("redirect:/carrinho?vazio");
+                return mv;
+            }
+
+            usuario.getHistorico().add(carrinho);
+
+            Carrinho NovoCarrinho = new Carrinho();
+            NovoCarrinho = service.salvar(NovoCarrinho);
+            
+            usuario.setCarrinhoAtual(NovoCarrinho);
+            usuario = usuarioService.salvar(usuario);
+            
+            NovoCarrinho.setUsuario(usuario);
+            service.salvar(NovoCarrinho);
+
+            return new ModelAndView("redirect:/carrinho?finalizar");
+        } catch (Exception e){
+            var mv = new ModelAndView("carrinho/index");
+            mv.addObject("erro", e.getMessage());
+            return mv;
+        }
     }
 
     @PostMapping
