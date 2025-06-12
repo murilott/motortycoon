@@ -67,7 +67,12 @@
                 </select>
                 <p th:if="${#fields.hasErrors('formaPagamento')}" th:errors="*{formaPagamento}">Erro de forma de pagamento</p>
             </div>
-        
+
+            <div>
+                <label for="cargo">Admin?</label>
+                <input type="checkbox" name="cargo" value="false">
+            </div>
+
             <button id="btnSalvar" type="submit">Salvar</button>
         </form>
 

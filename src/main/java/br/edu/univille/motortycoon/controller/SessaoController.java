@@ -72,7 +72,7 @@ public class SessaoController {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, BindingResult bindingResult) {
+    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, @RequestParam(name = "cargo", required = false) Boolean admin, BindingResult bindingResult) {
         try {
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("sessao/registrar");
@@ -100,9 +100,13 @@ public class SessaoController {
             
             if (!roles.contains("ROLE_USER")) {
                 roles.add("ROLE_USER");
+                // roles.add("ROLE_ADMIN");
+            }
+
+            if (admin && (admin != null) && !roles.contains("ROLE_ADMIN")) {
                 roles.add("ROLE_ADMIN");
             }
-            
+
             usuario.setCargos(roles);  // Atualiza o usuário com a lista de papéis
             usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
