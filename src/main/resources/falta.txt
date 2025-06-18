@@ -1,0 +1,3 @@
+- css nas págs.
+- corrigir a quantidade de itens no carrinho no menu
+- fragmento de css no layout
