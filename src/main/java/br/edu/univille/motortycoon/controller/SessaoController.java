@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,9 +73,13 @@ public class SessaoController {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, @RequestParam(name = "cargo", required = false) Boolean admin, BindingResult bindingResult) {
+    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, @Valid @RequestParam(name = "cargo", required = false) Boolean admin, BindingResult bindingResult) {
         try {
             if ( bindingResult.hasErrors() ) {
+                for (ObjectError error : bindingResult.getAllErrors()) {
+            System.out.println("AAAAAAAAAAAAAAAAAAA Erro de validação: " + error.getDefaultMessage());
+        }
+
                 var mv = new ModelAndView("sessao/registrar");
                 usuario.setSenha(null);
                 mv.addObject("elemento", usuario);
