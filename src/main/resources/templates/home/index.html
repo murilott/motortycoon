@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/layout.css">
+        <link rel="stylesheet" href="/css/home.css">
         <title>Home</title>
     </head>
     <body>
@@ -13,7 +15,7 @@
 
         <h2>Produtos</h2>
 
-        <div th:if="${lista.size()} > 0">
+        <div th:if="${lista.size()} > 0" class="produto">
             <ul th:each="e : ${lista}" style="border: 1px solid; width: 250px;">
                 <li><img th:src="${e.imagem}" style="width:100px;"></li>
                 <li>Código: <span th:text="${e.id}"></span> </li>
