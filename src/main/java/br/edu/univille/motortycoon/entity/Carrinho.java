@@ -45,5 +45,9 @@ public class Carrinho {
         return soma;
     }
 
+    public int obterTamanhoCarrinho() {
+        return (itens != null ? itens.size() : 0);
+    }
+
     
 }

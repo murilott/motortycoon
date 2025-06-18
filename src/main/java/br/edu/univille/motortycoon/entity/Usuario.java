@@ -77,6 +77,11 @@ public class Usuario implements UserDetails {
         return this.email;
     }
 
+    // @Override
+    public Carrinho getCarrinhoAtual() {
+        return this.carrinhoAtual;
+    }
+
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }

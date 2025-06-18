@@ -93,7 +93,6 @@ public class SessaoController {
 
             List<String> roles = usuario.getCargos();
     
-            // Se não existir, adiciona o papel ADMIN
             if (roles == null) {
                 roles = new ArrayList<>();
             }
@@ -103,7 +102,7 @@ public class SessaoController {
                 // roles.add("ROLE_ADMIN");
             }
 
-            if (admin && (admin != null) && !roles.contains("ROLE_ADMIN")) {
+            if ((admin != null) && !roles.contains("ROLE_ADMIN")) {
                 roles.add("ROLE_ADMIN");
             }
 
