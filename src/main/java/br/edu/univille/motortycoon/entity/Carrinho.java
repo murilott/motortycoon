@@ -46,7 +46,7 @@ public class Carrinho {
     }
 
     public int obterTamanhoCarrinho() {
-        return (itens != null ? itens.size() : 0);
+        return (this.itens != null ? this.itens.size() : 0);
     }
 
     

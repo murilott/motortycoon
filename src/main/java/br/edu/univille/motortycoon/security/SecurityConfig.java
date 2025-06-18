@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,8 @@ import br.edu.univille.motortycoon.repository.UsuarioRepository;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements WebMvcConfigurer {
+    private UsuarioRepository usuarioRepository;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,6 +36,15 @@ public class SecurityConfig implements WebMvcConfigurer {
     // public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
     //     return authenticationConfiguration.getAuthenticationManager();
     // }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = 
+            http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(userDetailsService(usuarioRepository));
+
+        return authenticationManagerBuilder.build();
+    }
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -56,7 +68,9 @@ public class SecurityConfig implements WebMvcConfigurer {
     
     @Bean
     public UserDetailsService userDetailsService(UsuarioRepository usuarioRepository) {
-        return email -> usuarioRepository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        return email -> { 
+            return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+            };
     }
 }
