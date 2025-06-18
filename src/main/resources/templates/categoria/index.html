@@ -21,6 +21,7 @@
               <tr th:each="e : ${lista}">
                 <td th:text="${e.id}">codigo</td>
                 <td th:text="${e.nome}">nome</td>
+                <td><a th:href="@{categoria/editar/{id}(id=${e.id})}">Editar</a></td>
               </tr>
         </table>
     </body>

@@ -34,3 +34,7 @@ ItemCarrinho
     carrinho: Carrinho 
     custo: long 
     produto: Equipamento 
+
+    SPRING SECURITY
+
+   https://copilot.microsoft.com/shares/6ArEA5mWwiE8mtRHmUjST

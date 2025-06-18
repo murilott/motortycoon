@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:replace="~{layout :: css}"></div>
+        <title>Redefinir Senha</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <div>
+            <h2>Redefinir senha</h2>
+
+            <button>Voltar</button>
+        </div>
+
+        <div th:if="${param.email}">
+            E-mail não encontrado.
+        </div>
+
+        <form th:action="@{/login/redefinir}" method="post">
+            <div>
+                <label for="email">Seu e-mail</label>
+                <input type="email" name="email" placeholder="E-mail" required>
+            </div>
+
+            <div>
+                <label for="senha">Nova senha</label>
+                <input type="text" placeholder="Senha" name="senha">
+            </div>
+
+            <button id="btnSalvar" type="submit">Mudar</button>
+        </form>
+
+        <p class="error" th:if="${erro != null}" th:text="${erro}"></p>
+    </body>
+</html>

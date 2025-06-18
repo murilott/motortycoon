@@ -16,6 +16,8 @@
         </div>
 
         <form th:action="@{/pagamento/salvar}" th:object="${elemento}" method="post">
+            <input readonly hidden type="text" th:field="*{id}">
+            
             <div>
                 <label for="nome">Nome:</label>
                 

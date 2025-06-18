@@ -56,8 +56,8 @@ public class PagamentoController {
     }
 
     @GetMapping
-    @RequestMapping("/{id}")
-    public ModelAndView editar(@PathVariable long id){
+    @RequestMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") long id){
         var mv = new ModelAndView("pagamento/editar");
         var opt = service.obterPeloId(id);
         

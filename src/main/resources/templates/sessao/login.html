@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:replace="~{layout :: css}"></div>
+        <title>Login</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <div>
+            <h2>Faça login no sistema</h2>
+        </div>
+
+        <div th:if="${param.error}">
+            Nome ou senha inválidos.
+        </div>
+        <div th:if="${param.logout}">
+            Você deslogou.
+        </div>
+        <div th:if="${param.registered}">
+            Usuário registrado com sucesso.
+        </div>
+        <div th:if="${param.redefined}">
+            Senha redefinida com sucesso.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" placeholder="Seu email" name="username">
+            </div>
+
+            <div>
+                <label for="senha">Senha</label>
+                <input type="text" placeholder="Sua senha" name="password">
+            </div>
+
+            <button id="btnSalvar" type="submit">Entrar</button>
+            <a th:href="@{/login/registrar}">Registre-se</a>
+            <a th:href="@{/login/redefinir}">Esqueci a senha</a>
+        </form>
+    </body>
+</html>

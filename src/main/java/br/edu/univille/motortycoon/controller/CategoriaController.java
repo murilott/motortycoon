@@ -56,9 +56,9 @@ public class CategoriaController {
     }
 
     @GetMapping
-    @RequestMapping("/{id}")
-    public ModelAndView editar(@PathVariable long id){
-        var mv = new ModelAndView("categoria/editar");
+    @RequestMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") long id){
+        var mv = new ModelAndView("categoria/novo");
         var opt = service.obterPeloId(id);
         
         if(opt.isPresent()) {

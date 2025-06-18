@@ -72,13 +72,15 @@ public class EquipamentoController {
     }
 
     @PostMapping
-    @RequestMapping("/{id}")
-    public ModelAndView editar(@PathVariable long id) {
-        var mv = new ModelAndView("equipamento/editar");
+    @RequestMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") long id) {
+        var mv = new ModelAndView("equipamento/novo");
         var opt = service.obterPeloId(id);
         
         if(opt.isPresent()) {
             mv.addObject("elemento", opt.get());
+            mv.addObject("listaCategoria", categoriaService.obterTodos());
+
             return mv;
         }
 
@@ -87,7 +89,7 @@ public class EquipamentoController {
 
     @GetMapping
     @RequestMapping("/view/{id}")
-    public ModelAndView view(@Valid @PathVariable long id, @ModelAttribute("itemCarrinho") ItemCarrinho item, BindingResult bindingResult) {
+    public ModelAndView view(@Valid @PathVariable("id") long id, @ModelAttribute("itemCarrinho") ItemCarrinho item, BindingResult bindingResult) {
         try{
             if ( bindingResult.hasErrors() ) {
                 var mv = new ModelAndView("equipamento/view");

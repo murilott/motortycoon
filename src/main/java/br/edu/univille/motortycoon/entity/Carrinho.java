@@ -18,7 +18,36 @@ public class Carrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne //(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_carrinho_usuario"))
+    private Usuario usuario;
     private float custoTotal;
-    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
     private List<ItemCarrinho> itens;
+
+    @Override
+    public String toString() {
+        return "Carrinho [id=" + id 
+            + ", usuarioId=" + (usuario != null ? usuario.getId() : "nullN")
+            + ", custoTotal=" + custoTotal 
+            + ", itensCount=" + (itens != null ? itens.size() : 0) 
+            + "]";
+    }
+
+    public float calcularCustoTotal() {
+        float soma = 0;
+
+        for (int i=0; i<this.itens.size(); i++) {
+            ItemCarrinho item = this.itens.get(i);
+            soma += item.getCusto();
+        }
+
+        return soma;
+    }
+
+    public int obterTamanhoCarrinho() {
+        return (this.itens != null ? this.itens.size() : 0);
+    }
+
+    
 }

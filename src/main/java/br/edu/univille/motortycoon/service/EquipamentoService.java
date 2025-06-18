@@ -27,8 +27,8 @@ public class EquipamentoService {
         return repository.findAll();
     }
 
-    public void salvar(Equipamento Equipamento) {
-        repository.save(Equipamento);
+    public Equipamento salvar(Equipamento Equipamento) {
+        return repository.save(Equipamento);
     }
 
     public void excluir(Equipamento Equipamento) {

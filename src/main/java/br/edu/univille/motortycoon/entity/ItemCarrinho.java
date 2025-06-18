@@ -21,9 +21,18 @@ public class ItemCarrinho {
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrinho_id")
     private Carrinho carrinho;
-    private long custo;
+    private double custo;
+    @Min(value = 1, message = "Estoque mínimo 1")
+    @NotNull(message = "Quantidade não deve ficar em branco")
     private int quantidade;
-    @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id")
     private Equipamento produto;
+
+    public float calcularCusto() {
+        System.out.println("item " + this.produto);
+        System.out.println("Custo " + this.produto.getCusto());
+        System.out.println("QUANTIDADE: " + this.quantidade);
+        return this.produto.getCusto() * this.quantidade;
+    }
 }
