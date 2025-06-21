@@ -2,3 +2,6 @@
 - corrigir a quantidade de itens no carrinho no menu
 - fragmento de css no layout
 - CORRIGIR ERRO DE validação no registrar
+
+- página de usuário com dados e histórico
+- categoria nome aceita somente números
