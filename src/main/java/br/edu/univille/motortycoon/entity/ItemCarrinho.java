@@ -30,9 +30,9 @@ public class ItemCarrinho {
     private Equipamento produto;
 
     public float calcularCusto() {
-        System.out.println("item " + this.produto);
-        System.out.println("Custo " + this.produto.getCusto());
-        System.out.println("QUANTIDADE: " + this.quantidade);
+        // System.out.println("item " + this.produto);
+        // System.out.println("Custo " + this.produto.getCusto());
+        // System.out.println("QUANTIDADE: " + this.quantidade);
         return this.produto.getCusto() * this.quantidade;
     }
 }

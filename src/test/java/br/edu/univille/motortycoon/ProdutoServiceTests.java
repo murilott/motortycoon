@@ -34,26 +34,54 @@ public class ProdutoServiceTests {
         equipamentoRepository.deleteAll();  // Limpa o banco de dados antes de cada teste
     }
 
+    // REFATORADO - MAGIC NUMBER
+
     @Test
     public void testSalvarProduto() {
-        // Criar o produto
+        // Define os valores constantes utilizados
+        final int ESTOQUE_PADRAO = 10;
+        final float CUSTO_PADRAO = 50;
+        final int QUANTIDADE_ESPERADA_DE_CHAMADA = 1;
+
+        // Cria o produto
+        Equipamento equipamento = new Equipamento();
+        equipamento.setNome("Capacete M");
+        equipamento.setEstoque(ESTOQUE_PADRAO);
+        equipamento.setCusto(CUSTO_PADRAO);
+
+        // Simula a persistência do objeto 'equipamento' no repositório, retornando o próprio objeto 'equipamento'
+        when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
+
+        // Salva o produto no banco de dados
+        Equipamento equipamentoSalvo = equipamentoService.salvar(equipamento);
+
+        // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
+        verify(equipamentoRepository, times(QUANTIDADE_ESPERADA_DE_CHAMADA)).save(equipamento);
+
+        // Verifica se o equipamento salvou corretamente
+        assertEquals(equipamento, equipamentoSalvo);
+    }
+
+    // SMELL
+
+    @Test
+    public void SmellTestSalvarProduto() {
+        // Cria o produto
         Equipamento equipamento = new Equipamento();
         equipamento.setNome("Capacete");
         equipamento.setEstoque(10);
         equipamento.setCusto(50);
 
+        // Simula a persistência do objeto 'equipamento' no repositório, retornando o próprio objeto 'equipamento'
         when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
 
         // Salva o produto no banco de dados
-        equipamento = equipamentoService.salvar(equipamento);
+        Equipamento equipamentoSalvo = equipamentoService.salvar(equipamento);
 
-        // Verificar se o produto foi salvo corretamente
-        assertNotNull(equipamento, "Equipamento não salvo");
-        assertEquals("Capacete", equipamento.getNome(), "nome errado");
-        assertEquals(10, equipamento.getEstoque());
-        assertEquals(50, equipamento.getCusto());
-
-        // Verificar se o método save foi chamado uma vez no mock e está salvo no repositório
+        // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
         verify(equipamentoRepository, times(1)).save(equipamento);
+
+        // Verifica se o equipamento salvou corretamente
+        assertEquals(equipamento, equipamentoSalvo);
     }
 }

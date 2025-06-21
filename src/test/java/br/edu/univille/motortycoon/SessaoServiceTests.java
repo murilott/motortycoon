@@ -1,0 +1,81 @@
+package br.edu.univille.motortycoon;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import br.edu.univille.motortycoon.entity.Categoria;
+import br.edu.univille.motortycoon.entity.Equipamento;
+import br.edu.univille.motortycoon.entity.Usuario;
+import br.edu.univille.motortycoon.repository.CategoriaRepository;
+import br.edu.univille.motortycoon.repository.EquipamentoRepository;
+import br.edu.univille.motortycoon.repository.UsuarioRepository;
+import br.edu.univille.motortycoon.service.CategoriaService;
+import br.edu.univille.motortycoon.service.EquipamentoService;
+import br.edu.univille.motortycoon.service.UsuarioService;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+public class SessaoServiceTests {
+    @Mock
+    private UsuarioRepository usuarioRepository;
+
+    @InjectMocks
+    private UsuarioService usuarioService;
+
+    @BeforeEach
+    void setUp() {
+        Usuario usuario = new Usuario();
+        usuario.setNomeCompleto("Murilo");
+        usuario.setEmail("murilo@gmail.com");
+        // usuario.set
+        // categoriaRepository.deleteAll();  // Limpa o banco de dados antes de cada teste
+    }
+
+    // REFATORADO - CONDITIONAL TEST
+
+    // @Test
+    // public void testVerificarCargoAoRegistrar() {
+    //     // Cria a categoria
+    //     Categoria categoria = new Categoria();
+    //     categoria.setNome("Capacete");
+
+    //     // Simula a persistência do objeto 'categoria' no repositório, retornando o próprio objeto 'categoria'
+    //     when(categoriaRepository.save(categoria)).thenReturn(categoria);
+
+    //     // Salva a categoria no banco de dados
+    //     Categoria categoriaSalvo = categoriaService.salvar(categoria);
+
+    //     // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
+    //     verify(categoriaRepository, times(1)).save(categoria);
+
+    //     // Verifica se a categoria salvou corretamente
+    //     assertEquals(categoria, categoriaSalvo);
+    // }
+
+    // SMELL
+
+    @Test
+    public void SmellTestSalvarCategoria() {
+        // Cria a categoria
+        // Categoria categoria = new Categoria();
+        // categoria.setNome("Capacete");
+
+        // Simula a persistência do objeto 'categoria' no repositório, retornando o próprio objeto 'categoria'
+        // when(categoriaRepository.save(categoria)).thenReturn(categoria);
+
+        // Categoria categoriaSalvo = categoriaService.salvar(categoria);
+    }
+}
