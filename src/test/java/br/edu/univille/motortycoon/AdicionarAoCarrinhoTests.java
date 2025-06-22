@@ -67,9 +67,9 @@ public class AdicionarAoCarrinhoTests {
     private ItemCarrinho item;
     private Carrinho carrinho;
 
-    // REFATORADO - EARGER TEST
+    // REFATORADO - EAGER TEST
 
-    @BeforeAll // Limpa o banco de dados antes dos teste
+    @BeforeAll // Limpa o banco de dados antes dos testes
     void setUp() {
         equipamentoRepository.deleteAll();  
         categoriaRepository.deleteAll(); 

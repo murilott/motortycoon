@@ -31,19 +31,16 @@ import br.edu.univille.motortycoon.service.ItemCarrinhoService;
 public class ItemCarrinhoServiceTests {
     @Mock
     private ItemCarrinhoRepository itemCarrinhoRepository;
-
     @InjectMocks
     private ItemCarrinhoService itemCarrinhoService;
 
     @Mock
     private EquipamentoRepository equipamentoRepository;
-
     @InjectMocks
     private EquipamentoService equipamentoService;
 
     @Mock
     private CategoriaRepository categoriaRepository;
-
     @InjectMocks
     private CategoriaService categoriaService;
 
@@ -55,41 +52,84 @@ public class ItemCarrinhoServiceTests {
     // REFATORADO - LAZY TEST
 
     @Test
-    public void testCalcularCustoItemCarrinho() {
+    public void testCalcularCustoItemCarrinho100() {
         Categoria categoria = new Categoria();
         categoria.setNome("Capacete");
 
-        when(categoriaRepository.save(categoria)).thenReturn(categoria);
-
-        // Cria o equipamento
         Equipamento equipamento = new Equipamento();
         equipamento.setNome("Capacete X");
         equipamento.setCusto(50);
+        equipamento.setCategoria(categoria);
 
-        // Simula a persistência do objeto 'categoria' no repositório, retornando o próprio objeto 'categoria'
-        when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
+        ItemCarrinho item = new ItemCarrinho();
+        item.setProduto(equipamento);
+        item.setQuantidade(2);
+        item.setCusto(item.calcularCusto());
 
-        // Salva a categoria no banco de dados
-        Categoria categoriaSalvo = categoriaService.salvar(categoria);
+        double custoEsperado = 50 * 2;
+        
+        assertEquals(custoEsperado, item.getCusto());
+    }
 
-        // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
-        verify(categoriaRepository, times(1)).save(categoria);
+    @Test
+    public void testCalcularCustoItemCarrinho0() {
+        Categoria categoria = new Categoria();
+        categoria.setNome("Capacete");
 
-        // Verifica se a categoria salvou corretamente
-        assertEquals(categoria, categoriaSalvo);
+        Equipamento equipamento = new Equipamento();
+        equipamento.setNome("Capacete X");
+        equipamento.setCusto(100);
+        equipamento.setCategoria(categoria);
+
+        ItemCarrinho item = new ItemCarrinho();
+        item.setProduto(equipamento);
+        item.setQuantidade(0);
+        item.setCusto(item.calcularCusto());
+
+        double custoEsperado = 100 * 0;
+        
+        assertEquals(custoEsperado, item.getCusto());
     }
 
     // SMELL
 
     @Test
-    public void SmellTestSalvarCategoria() {
-        // Cria a categoria
-        // Categoria categoria = new Categoria();
-        // categoria.setNome("Capacete");
+    public void SmellTestCalcularCustoItemCarrinho1() {
+        Categoria categoria = new Categoria();
+        categoria.setNome("Capacete");
 
-        // Simula a persistência do objeto 'categoria' no repositório, retornando o próprio objeto 'categoria'
-        // when(categoriaRepository.save(categoria)).thenReturn(categoria);
+        Equipamento equipamento = new Equipamento();
+        equipamento.setNome("Capacete X");
+        equipamento.setCusto(50);
+        equipamento.setCategoria(categoria);
 
-        // Categoria categoriaSalvo = categoriaService.salvar(categoria);
+        ItemCarrinho item = new ItemCarrinho();
+        item.setProduto(equipamento);
+        item.setQuantidade(2);
+        item.setCusto(item.calcularCusto());
+
+        double custoEsperado = 50 * 2;
+        
+        assertEquals(custoEsperado, item.getCusto());
+    }
+
+    @Test
+    public void SmellTestCalcularCustoItemCarrinho2() {
+        Categoria categoria = new Categoria();
+        categoria.setNome("Capacete");
+
+        Equipamento equipamento = new Equipamento();
+        equipamento.setNome("Capacete X");
+        equipamento.setCusto(50);
+        equipamento.setCategoria(categoria);
+
+        ItemCarrinho item = new ItemCarrinho();
+        item.setProduto(equipamento);
+        item.setQuantidade(2);
+        item.setCusto(item.calcularCusto());
+
+        double custoEsperado = 50 * 2;
+        
+        assertEquals(custoEsperado, item.getCusto());
     }
 }
