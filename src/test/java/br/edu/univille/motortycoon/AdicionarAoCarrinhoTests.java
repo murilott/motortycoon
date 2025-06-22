@@ -131,59 +131,56 @@ public class AdicionarAoCarrinhoTests {
 
     // SMELL
 
-    // @BeforeEach // Limpa o banco de dados antes de cada teste
-    // void SmellSetUp() {
-    //     equipamentoRepository.deleteAll();  
-    //     categoriaRepository.deleteAll(); 
-    //     itemCarrinhoRepository.deleteAll(); 
-    //     carrinhoRepository.deleteAll(); 
-    // }
+    @BeforeEach // Limpa o banco de dados antes de cada teste
+    void SmellSetUp() {
+        equipamentoRepository.deleteAll();  
+        categoriaRepository.deleteAll(); 
+        itemCarrinhoRepository.deleteAll(); 
+        carrinhoRepository.deleteAll(); 
+    }
 
-    // @Test
-    // public void SmellTestFluxoAdicionarCarrinho() {
-    //     Categoria categoria = new Categoria();
-    //     categoria.setNome("Capacete");
+    @Test
+    public void SmellTestFluxoAdicionarCarrinho() {
+        Categoria categoria = new Categoria();
+        categoria.setNome("Capacete");
         
-    //     when(categoriaRepository.save(categoria)).thenReturn(categoria);
-    //     Categoria categoriaSalvo = categoriaService.salvar(categoria);
-    //     verify(categoriaRepository, times(1)).save(categoria);
-    //     assertEquals(categoria, categoriaSalvo);
+        when(categoriaRepository.save(categoria)).thenReturn(categoria);
+        Categoria categoriaSalvo = categoriaService.salvar(categoria);
+        verify(categoriaRepository, times(1)).save(categoria);
+        assertEquals(categoria, categoriaSalvo);
 
-    //     Equipamento equipamento = new Equipamento();
-    //     equipamento.setNome("Capacete X");
-    //     equipamento.setEstoque(10);
-    //     equipamento.setCusto(50);
-    //     equipamento.setCategoria(categoria);
+        Equipamento equipamento = new Equipamento();
+        equipamento.setNome("Capacete X");
+        equipamento.setEstoque(10);
+        equipamento.setCusto(50);
+        equipamento.setCategoria(categoria);
 
-    //     when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
-    //     Equipamento equipamentoSalvo = equipamentoService.salvar(equipamento);
-    //     verify(equipamentoRepository, times(1)).save(equipamento);
-    //     assertEquals(equipamento, equipamentoSalvo);
+        when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
+        Equipamento equipamentoSalvo = equipamentoService.salvar(equipamento);
+        verify(equipamentoRepository, times(1)).save(equipamento);
+        assertEquals(equipamento, equipamentoSalvo);
         
-    //     ItemCarrinho item = new ItemCarrinho();
-    //     item.setProduto(equipamento);
-    //     item.setQuantidade(1);
-    //     item.setCusto(item.calcularCusto());
+        ItemCarrinho item = new ItemCarrinho();
+        item.setProduto(equipamento);
+        item.setQuantidade(1);
+        item.setCusto(item.calcularCusto());
 
-    //     when(itemCarrinhoRepository.save(item)).thenReturn(item);
-    //     ItemCarrinho itemSalvo = itemCarrinhoService.salvar(item);
-    //     verify(itemCarrinhoRepository, times(1)).save(item);
-    //     assertEquals(item, itemSalvo);
+        when(itemCarrinhoRepository.save(item)).thenReturn(item);
+        ItemCarrinho itemSalvo = itemCarrinhoService.salvar(item);
+        verify(itemCarrinhoRepository, times(1)).save(item);
+        assertEquals(item, itemSalvo);
         
-    //     Carrinho carrinho = new Carrinho();
-    //     carrinho.setItens(new ArrayList<ItemCarrinho>());
-    //     carrinho.getItens().add(item);
+        Carrinho carrinho = new Carrinho();
+        carrinho.setItens(new ArrayList<ItemCarrinho>());
+        carrinho.getItens().add(item);
         
-    //     when(carrinhoRepository.save(carrinho)).thenReturn(carrinho);
-    //     Carrinho carrinhoSalvo = carrinhoService.salvar(carrinho);
-    //     verify(carrinhoRepository, times(1)).save(carrinho);
-    //     assertEquals(carrinho, carrinhoSalvo);
+        when(carrinhoRepository.save(carrinho)).thenReturn(carrinho);
+        Carrinho carrinhoSalvo = carrinhoService.salvar(carrinho);
+        verify(carrinhoRepository, times(1)).save(carrinho);
+        assertEquals(carrinho, carrinhoSalvo);
         
-    //     assertEquals(1, carrinho.obterTamanhoCarrinho());
-
-    //     // when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
-    //     // when(equipamentoRepository.findById(1L)).thenReturn(java.util.Optional.of(equipamento));
-    // }
+        assertEquals(1, carrinho.obterTamanhoCarrinho());
+    }
 
 
 }

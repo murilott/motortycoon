@@ -41,7 +41,6 @@ public class CategoriaServiceTests {
 
     @Test
     public void testSalvarCategoria() {
-        // Cria a categoria
         Categoria categoria = new Categoria();
         categoria.setNome("Capacete");
 
