@@ -1,10 +1,14 @@
 package br.edu.univille.motortycoon;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,47 +39,50 @@ public class SessaoServiceTests {
     @InjectMocks
     private UsuarioService usuarioService;
 
+    Usuario usuario;
+
     @BeforeEach
     void setUp() {
-        Usuario usuario = new Usuario();
+        usuarioRepository.deleteAll();
+        
+        usuario = new Usuario();
         usuario.setNomeCompleto("Murilo");
         usuario.setEmail("murilo@gmail.com");
-        // usuario.set
-        // categoriaRepository.deleteAll();  // Limpa o banco de dados antes de cada teste
+        usuario.setSenha("123");
+        usuario.setCargos(new ArrayList<String>());
     }
 
-    // REFATORADO - CONDITIONAL TEST
+    // REFATORADO - CONDITIONAL TEST LOGIC
 
-    // @Test
-    // public void testVerificarCargoAoRegistrar() {
-    //     // Cria a categoria
-    //     Categoria categoria = new Categoria();
-    //     categoria.setNome("Capacete");
+    @Test
+    public void testAtribuirCargoUser() {        
+        usuario.getCargos().add("ROLE_USER");
 
-    //     // Simula a persistência do objeto 'categoria' no repositório, retornando o próprio objeto 'categoria'
-    //     when(categoriaRepository.save(categoria)).thenReturn(categoria);
+        assertTrue(usuario.getCargos().contains("ROLE_USER"));
+        assertFalse(usuario.getCargos().contains("ROLE_ADMIN"));
+    }
 
-    //     // Salva a categoria no banco de dados
-    //     Categoria categoriaSalvo = categoriaService.salvar(categoria);
+    @Test
+    public void testAtribuirCargoAdmin() {
+        usuario.getCargos().add("ROLE_USER");
+        usuario.getCargos().add("ROLE_ADMIN");
 
-    //     // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
-    //     verify(categoriaRepository, times(1)).save(categoria);
-
-    //     // Verifica se a categoria salvou corretamente
-    //     assertEquals(categoria, categoriaSalvo);
-    // }
+        assertTrue(usuario.getCargos().contains("ROLE_USER"));
+        assertTrue(usuario.getCargos().contains("ROLE_ADMIN"));
+    }
 
     // SMELL
 
     @Test
-    public void SmellTestSalvarCategoria() {
-        // Cria a categoria
-        // Categoria categoria = new Categoria();
-        // categoria.setNome("Capacete");
-
-        // Simula a persistência do objeto 'categoria' no repositório, retornando o próprio objeto 'categoria'
-        // when(categoriaRepository.save(categoria)).thenReturn(categoria);
-
-        // Categoria categoriaSalvo = categoriaService.salvar(categoria);
+    public void SmellTestAtribuirCargo() {
+        boolean admin = false;
+        
+        if (!admin) {
+            usuario.getCargos().add("ROLE_USER");
+            assertTrue(usuario.getCargos().contains("ROLE_USER"));
+        } else {
+            usuario.getCargos().add("ROLE_ADMIN");
+            assertTrue(usuario.getCargos().contains("ROLE_ADMIN"));
+        }
     }
 }

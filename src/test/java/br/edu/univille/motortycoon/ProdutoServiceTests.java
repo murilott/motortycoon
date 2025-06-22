@@ -58,8 +58,9 @@ public class ProdutoServiceTests {
         // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
         verify(equipamentoRepository, times(QUANTIDADE_ESPERADA_DE_CHAMADA)).save(equipamento);
 
-        // Verifica se o equipamento salvou corretamente
-        assertEquals(equipamento, equipamentoSalvo);
+        assertEquals("Capacete M", equipamentoSalvo.getNome());
+        assertEquals(ESTOQUE_PADRAO, equipamentoSalvo.getEstoque());
+        assertEquals(CUSTO_PADRAO, equipamentoSalvo.getCusto());
     }
 
     // SMELL
@@ -81,7 +82,8 @@ public class ProdutoServiceTests {
         // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
         verify(equipamentoRepository, times(1)).save(equipamento);
 
-        // Verifica se o equipamento salvou corretamente
-        assertEquals(equipamento, equipamentoSalvo);
+        assertEquals("Capacete", equipamentoSalvo.getNome());
+        assertEquals(10, equipamentoSalvo.getEstoque());
+        assertEquals(50, equipamentoSalvo.getCusto());
     }
 }

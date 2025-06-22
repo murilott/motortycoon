@@ -66,29 +66,16 @@ public class ItemCarrinhoServiceTests {
         item.setQuantidade(2);
         item.setCusto(item.calcularCusto());
 
+        ItemCarrinho item2 = new ItemCarrinho();
+        item2.setProduto(equipamento);
+        item2.setQuantidade(5);
+        item2.setCusto(item2.calcularCusto());
+
         double custoEsperado = 50 * 2;
+        double custoEsperado2 = 50 * 5;
         
         assertEquals(custoEsperado, item.getCusto());
-    }
-
-    @Test
-    public void testCalcularCustoItemCarrinho0() {
-        Categoria categoria = new Categoria();
-        categoria.setNome("Capacete");
-
-        Equipamento equipamento = new Equipamento();
-        equipamento.setNome("Capacete X");
-        equipamento.setCusto(100);
-        equipamento.setCategoria(categoria);
-
-        ItemCarrinho item = new ItemCarrinho();
-        item.setProduto(equipamento);
-        item.setQuantidade(0);
-        item.setCusto(item.calcularCusto());
-
-        double custoEsperado = 100 * 0;
-        
-        assertEquals(custoEsperado, item.getCusto());
+        assertEquals(custoEsperado2, item2.getCusto());
     }
 
     // SMELL
