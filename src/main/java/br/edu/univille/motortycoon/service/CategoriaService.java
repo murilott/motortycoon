@@ -27,8 +27,8 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public void salvar(Categoria Categoria) {
-        repository.save(Categoria);
+    public Categoria salvar(Categoria Categoria) {
+        return repository.save(Categoria);
     }
 
     public void excluir(Categoria Categoria) {
