@@ -24,7 +24,7 @@
 
             <ul id="options">
                 <li><a th:href="@{/}">Home</a></li>
-                <li th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/carrinho}">Carrinho</a> <span id="numero-itens-carrinho" th:text="${#authentication.principal.carrinhoAtual.obterTamanhoCarrinho()}"></span></li>     
+                <li th:if="${#authorization.expression('isAuthenticated()')}" style="position: relative;"><a th:href="@{/carrinho}">Carrinho</a> <span id="numero-itens-carrinho" th:text="${#authentication.principal.carrinhoAtual.obterTamanhoCarrinho()}"></span></li>     
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/equipamento}">Equipamento</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categoria}">Categoria</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/pagamento}">Pagamento</a></li>    

@@ -13,47 +13,52 @@
         <div class="equipamento-view container">
             <h2>Visualizando produto: <span th:if="${elemento}" th:text="${elemento.nome}"></span></h2>
 
-            <div class="equipamento-details">
-        <ul th:if="${elemento}">
-            <li class="equipamento-image"><img th:src="${elemento.imagem}"> </li>
-            <li>Código: <span th:text="${elemento.id}"></span> </li>
-            <li>Nome: <span th:text="${elemento.nome}"></span> </li>
-            <li>Custo: <span th:text="${elemento.custo}"></span> </li>
-            <li>Estoque: <span th:text="${elemento.estoque}"></span> </li>
-            <li>Categoria: <span th:text="${elemento.categoria.nome}"></span> </li>
-        </ul>
+            <div class="equipamento-details" th:if="${elemento}">
+                <div class="imagem-container">
+                    <img th:src="@{${elemento.imagem}}" alt="Imagem do produto" class="equipamento-image">
+                </div>
 
-        <form th:action="@{/carrinho/adicionar}" th:object="${itemCarrinho}" method="post">
-            <div>
-                <input readonly hidden type="text" th:field="*{produto.id}">
-                <input readonly hidden type="text" th:field="*{produto.nome}">
-                <input readonly hidden type="text" th:field="*{produto.custo}">
-                <input readonly hidden type="text" th:field="*{produto.estoque}">
-                <input readonly hidden type="text" th:field="*{produto.categoria}">
-                <input readonly hidden type="text" th:field="*{produto.imagem}">
-            </div>
-            
-            <div th:if="${param.quantidadeMenor}">
-                Selecione pelo menos uma unidade.
-            </div>
-            <div th:if="${param.quantidadeEstoque}">
-                Quantidade selecionada excede o estoque.
-            </div>
+                    <ul class="equipamento-view-ul">
+                        <li>Código: <span th:text="${elemento.id}"></span> </li>
+                        <li>Nome: <span th:text="${elemento.nome}"></span> </li>
+                        <li>Custo: <span th:text="${elemento.custo}"></span> </li>
+                        <li>Estoque: <span th:text="${elemento.estoque}"></span> </li>
+                        <li>Categoria: <span th:text="${elemento.categoria.nome}"></span> </li>
+                    </ul>
 
-            <div>
-                <label for="quantidade">Quantidade</label>
+                <form th:action="@{/carrinho/adicionar}" th:object="${itemCarrinho}" class="equipamento-view-form" method="post">
+                    <div>
+                        <input readonly hidden type="text" th:field="*{produto.id}">
+                        <input readonly hidden type="text" th:field="*{produto.nome}">
+                        <input readonly hidden type="text" th:field="*{produto.custo}">
+                        <input readonly hidden type="text" th:field="*{produto.estoque}">
+                        <input readonly hidden type="text" th:field="*{produto.categoria}">
+                        <input readonly hidden type="text" th:field="*{produto.imagem}">
+                    </div>
+                    
+                    <div th:if="${param.quantidadeMenor}">
+                        Selecione pelo menos uma unidade.
+                    </div>
+                    <div th:if="${param.quantidadeEstoque}">
+                        Quantidade selecionada excede o estoque.
+                    </div>
 
-                <input type="number" placeholder="Quantidade:" max="${produto.estoque}" th:field="*{quantidade}">
-                <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Erro de quantidade</p>
+                    <div class="quantidade">
+                       <div>
+                         <label for="quantidade">Quantidade:</label>
+
+                        <input type="number" placeholder="Quantidade:" max="${produto.estoque}" th:field="*{quantidade}" class="inpute">
+                       </div>
+                        <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}" >Erro de quantidade</p>
+                        <button id="btnSalvar" type="submit">Adicionar ao carrinho</button>
+                    </div>
+        
+                </form>
+
+                <p th:if="${erro}" th:text="${erro}">
+                    Erro
+                </p>
             </div>
- 
-            <button id="btnSalvar" type="submit">Adicionar ao carrinho</button>
-        </form>
-
-        <p th:if="${erro}" th:text="${erro}">
-            Erro
-        </p>
-    </div>
         </div>
     </body>
 </html>

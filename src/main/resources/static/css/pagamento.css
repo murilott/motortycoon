@@ -1,334 +1,334 @@
 /* Páginas de Pagamento */
 .pagamento-container {
-    padding: 2rem 0;
+  padding: 2rem 0;
 }
 
 .pagamento-header {
-    text-align: center;
-    margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .pagamento-header h2 {
-    color: var(--main);
-    font-family: var(--font-title);
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+  color: var(--main);
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 .pagamento-header p {
-    color: #666;
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
+  color: #666;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
 /* Formulário de pagamento */
 .pagamento-form {
-    background: white;
-    padding: 3rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    margin: 2rem 0;
-    max-width: 800px;
+  background: white;
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  max-width: 800px;
+  display: grid;
+  gap: 10px;
 }
 
 .pagamento-form h3 {
-    color: var(--main);
-    font-family: var(--font-title);
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--main);
+  color: var(--main);
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--main);
 }
 
 /* Seções do formulário */
 .pagamento-section {
-    margin-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 .pagamento-section:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .pagamento-section h4 {
-    color: var(--dark);
-    font-family: var(--font-title);
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
+  color: var(--dark);
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
 }
 
 /* Campos do formulário */
 .pagamento-form .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .pagamento-form .form-row.full-width {
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
 }
 
 .pagamento-form .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .pagamento-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--dark);
-    font-family: var(--font-body);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  font-family: var(--font-body);
 }
 
 .pagamento-form input,
 .pagamento-form select,
 .pagamento-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: var(--border-radius);
-    font-family: var(--font-body);
-    transition: var(--transition);
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  font-family: var(--font-body);
+  transition: var(--transition);
 }
 
 .pagamento-form input:focus,
 .pagamento-form select:focus,
 .pagamento-form textarea:focus {
-    outline: none;
-    border-color: var(--main);
-    box-shadow: 0 0 0 3px rgba(240, 24, 22, 0.1);
+  outline: none;
+  border-color: var(--main);
+  box-shadow: 0 0 0 3px rgba(240, 24, 22, 0.1);
 }
 
 /* Métodos de pagamento */
 .payment-methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .payment-method {
-    border: 2px solid #ddd;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: var(--transition);
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .payment-method:hover {
-    border-color: var(--main);
-    background-color: rgba(240, 24, 22, 0.05);
+  border-color: var(--main);
+  background-color: rgba(240, 24, 22, 0.05);
 }
 
 .payment-method.selected {
-    border-color: var(--main);
-    background-color: rgba(240, 24, 22, 0.1);
+  border-color: var(--main);
+  background-color: rgba(240, 24, 22, 0.1);
 }
 
 .payment-method input[type="radio"] {
-    display: none;
+  display: none;
 }
 
 .payment-method .method-icon {
-    font-size: 2rem;
-    color: var(--main);
-    margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: var(--main);
+  margin-bottom: 0.5rem;
 }
 
 .payment-method .method-name {
-    font-weight: 600;
-    color: var(--dark);
-    margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
 }
 
 .payment-method .method-description {
-    font-size: 0.9rem;
-    color: #666;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 /* Resumo do pedido */
 .order-summary {
-    background: var(--light);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--main);
-    margin-bottom: 2rem;
+  background: var(--light);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--main);
+  margin-bottom: 2rem;
 }
 
 .order-summary h4 {
-    color: var(--main);
-    font-family: var(--font-title);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    text-align: center;
+  color: var(--main);
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .order-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .order-item:last-child {
-    border-bottom: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--main);
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--main);
 }
 
 .order-item .item-name {
-    font-weight: 600;
-    color: var(--dark);
+  font-weight: 600;
+  color: var(--dark);
 }
 
 .order-item .item-price {
-    font-weight: 600;
-    color: var(--main);
+  font-weight: 600;
+  color: var(--main);
 }
 
 /* Botões de ação */
 .pagamento-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 3rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
 }
 
 .pagamento-actions .btn {
-    padding: 15px 30px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-family: var(--font-body);
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: var(--transition);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.1rem;
+  padding: 15px 30px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.1rem;
 }
 
 .pagamento-actions .btn-primary {
-    background: linear-gradient(135deg, rgb(129, 4, 4), #d01614);
-    color: white;
+  background: linear-gradient(135deg, rgb(129, 4, 4), #d01614);
+  color: white;
 }
 
 .pagamento-actions .btn-primary:hover {
-    background: linear-gradient(135deg, #d01614, #b01412);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+  background: linear-gradient(135deg, #d01614, #b01412);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .pagamento-actions .btn-secondary {
-    background-color: var(--dark);
-    color: white;
+  background-color: var(--dark);
+  color: white;
 }
 
 .pagamento-actions .btn-secondary:hover {
-    background-color: #555;
-    transform: translateY(-2px);
+  background-color: #555;
+  transform: translateY(-2px);
 }
 
 /* Mensagens de status */
 .pagamento-messages {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .pagamento-message {
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-    font-weight: 600;
-    text-align: center;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .pagamento-message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
 }
 
 .pagamento-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 /* Segurança */
 .security-info {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    border-left: 4px solid var(--main);
-    margin-bottom: 2rem;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--main);
+  margin-bottom: 2rem;
 }
 
 .security-info h5 {
-    color: var(--main);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  color: var(--main);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .security-info p {
-    color: #666;
-    margin: 0;
-    font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .pagamento-form {
-        padding: 2rem 1.5rem;
-    }
-    
-    .pagamento-form .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .payment-methods {
-        grid-template-columns: 1fr;
-    }
-    
-    .pagamento-actions {
-        flex-direction: column;
-    }
-    
-    .pagamento-actions .btn {
-        width: 100%;
-    }
-    
-    .order-summary {
-        padding: 1.5rem;
-    }
+  .pagamento-form {
+    padding: 2rem 1.5rem;
+  }
+
+  .pagamento-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .pagamento-actions {
+    flex-direction: column;
+  }
+
+  .pagamento-actions .btn {
+    width: 100%;
+  }
+
+  .order-summary {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .pagamento-container {
-        padding: 1rem 0;
-    }
-    
-    .pagamento-form {
-        padding: 1.5rem 1rem;
-        margin: 1rem;
-    }
-    
-    .pagamento-header h2 {
-        font-size: 2rem;
-    }
-    
-    .payment-method {
-        padding: 1rem;
-    }
-    
-    .security-info {
-        padding: 1rem;
-    }
-}
+  .pagamento-container {
+    padding: 1rem 0;
+  }
 
+  .pagamento-form {
+    padding: 1.5rem 1rem;
+    margin: 1rem;
+  }
+
+  .pagamento-header h2 {
+    font-size: 2rem;
+  }
+
+  .payment-method {
+    padding: 1rem;
+  }
+
+  .security-info {
+    padding: 1rem;
+  }
+}

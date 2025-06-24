@@ -1,125 +1,130 @@
 /* Header/Navegação */
 .header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, rgb(129, 4, 4), #d01614);
-    color: white;
-    box-shadow: var(--shadow);
-    margin-bottom: 2rem;
-    border-radius: 10px;
-    margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgb(129, 4, 4), #d01614);
+  color: white;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  margin-top: 2rem;
 }
 
 .header h2 {
-    font-family: var(--font-title);
-    font-size: 2.5rem;
-    line-height: 1em;
-    margin: 0;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  line-height: 1em;
+  margin: 0;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .header ul {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .header ul li {
-    list-style: none;
+  list-style: none;
 }
 
 .header ul li a {
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
-    transition: var(--transition);
-    display: block;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  display: block;
+  position: relative;
+  z-index: 2;
 }
 
 .header ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
 }
 
 .header #options {
-    flex: 1;
-    justify-content: center;
+  flex: 1;
+  justify-content: center;
 }
 
 .header #login {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .header #login span {
-    color: white;
-    font-weight: 600;
+  color: white;
+  font-weight: 600;
 }
 
 .header form {
-    display: inline;
+  display: inline;
 }
 .header #numero-itens-carrinho {
-    background: var(--dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-    font-family: var(--font);
-    padding-top: 3px;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  font-family: var(--font);
+  padding-top: 3px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
 }
 .header form button {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid white;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
 }
 
 .header form button:hover {
-    background-color: white;
-    color: var(--main);
+  background-color: white;
+  color: var(--main);
 }
 
 /* Responsividade do header */
 @media (max-width: 1024px) {
-    .header {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-    
-    .header #options,
-    .header #login {
-        justify-content: center;
-    }
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .header #options,
+  .header #login {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
-    .header {
-        padding: 1rem;
-    }
-    
-    .header h2 {
-        font-size: 2rem;
-    }
-    
-    .header ul {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    
-    .header ul li a {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.9rem;
-    }
+  .header {
+    padding: 1rem;
+  }
+
+  .header h2 {
+    font-size: 2rem;
+  }
+
+  .header ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .header ul li a {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }
