@@ -21,7 +21,7 @@ public class Equipamento {
     private Long id;
     @NotBlank(message = "Nome não deve ficar em branco")
     private String nome;
-    @DecimalMin(value = "0.01", message = "Custo mpinimo 0.01")
+    @DecimalMin(value = "0.01", message = "Custo mínimo 0.01")
     @NotNull(message = "Custo não deve ficar em branco")
     private float custo;
     @Min(value = 1, message = "Estoque mínimo 1")
