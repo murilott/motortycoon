@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:replace="~{layout :: css}"></div>
+        <title>Usuario</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <h2>Usuario</h2>
+
+        <a th:href="@{usuario/novo}">Novo usuario</a>
+
+        <table th:if="${lista.size()} > 0">
+            <tr>
+                <th>Código</th>
+                <th>Nome Completo</th>
+                <th>Data de nascimento</th>
+                <th>Endereço</th>
+                <th>CPF</th>
+                <th>Formas de pagamento</th>
+                <th>Cargos</th>
+                <th>Carrinho Atual</th>
+                <th>Histórico</th>
+              </tr>
+              <tr th:each="e : ${lista}">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.nomeCompleto}"></td>
+                <td th:text="${e.dataNascimento}"></td>
+                <td th:text="${e.endereco}"></td>
+                <td th:text="${e.cpf}"></td>
+                <td th:text="${e.formaPagamento}"></td>
+                <td th:text="${e.cargos}"></td>
+                <td th:text="${e.carrinhoAtual}"></td>
+                <td th:text="${e.historico}"></td>
+              </tr>
+        </table>
+    </body>
+</html>

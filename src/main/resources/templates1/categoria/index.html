@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Categoria</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <h2>Categorias</h2>
+
+        <a th:href="@{categoria/novo}">Nova categoria</a>
+
+        <table th:if="${lista.size()} > 0">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+              </tr>
+              <tr th:each="e : ${lista}">
+                <td th:text="${e.id}">codigo</td>
+                <td th:text="${e.nome}">nome</td>
+                <td><a th:href="@{categoria/editar/{id}(id=${e.id})}">Editar</a></td>
+              </tr>
+        </table>
+    </body>
+</html>

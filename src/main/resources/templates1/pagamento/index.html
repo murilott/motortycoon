@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pagamento</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <h2>Pagamentos</h2>
+
+        <a th:href="@{pagamento/novo}">Novo pagamento</a>
+
+        <table th:if="${lista.size()} > 0">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+              </tr>
+              <tr th:each="e : ${lista}">
+                <td th:text="${e.id}"></td>
+                <td th:text="${e.nome}"></td>
+                <td><a th:href="@{pagamento/editar/{id}(id=${e.id})}">Editar</a></td>
+              </tr>
+        </table>
+    </body>
+</html>

@@ -4,21 +4,16 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <div th:replace="~{layout :: css}"></div>
-        <link rel="stylesheet" href="/css/equipamento.css">
         <title>Equipamento</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
-        <div class="equipamento-container container">
-        <div class="equipamento-header">
-            <h2>Equipamento</h2>
+        <h2>Equipamento</h2>
 
-        <a th:href="@{equipamento/novo}" class="btn">Novo equipamento</a>
-        </div>
+        <a th:href="@{equipamento/novo}">Novo equipamento</a>
 
-        <table th:if="${lista.size()} > 0" class=equipamento-table>
+        <table th:if="${lista.size()} > 0">
             <tr>
                 <th>Código</th>
                 <th>Nome</th>
@@ -34,9 +29,8 @@
                 <td th:text="${e.estoque}"></td>
                 <td th:text="${e.categoria.nome}"></td>
                 <td><img th:src="${e.imagem}" style="width:100px;"></td>
-                <td><a th:href="@{equipamento/editar/{id}(id=${e.id})}" class="btn">Editar</a></td>
+                <td><a th:href="@{equipamento/editar/{id}(id=${e.id})}">Editar</a></td>
               </tr>
         </table>
-        </div>
     </body>
 </html>

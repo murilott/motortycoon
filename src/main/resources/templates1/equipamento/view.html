@@ -3,19 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <div th:replace="~{layout :: css}"></div>
-        <link rel="stylesheet" href="/css/equipamento.css">
         <title>Produto</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
-        <div class="equipamento-view container">
-            <h2>Visualizando produto: <span th:if="${elemento}" th:text="${elemento.nome}"></span></h2>
+        <h2>Visualizando produto: <span th:if="${elemento}" th:text="${elemento.nome}"></span></h2>
 
-            <div class="equipamento-details">
-        <ul th:if="${elemento}">
-            <li class="equipamento-image"><img th:src="${elemento.imagem}"> </li>
+        <ul th:if="${elemento}" style="border: 1px solid; width: 250px;">
+            <li><img th:src="${elemento.imagem}" style="width:100px;"> </li>
             <li>Código: <span th:text="${elemento.id}"></span> </li>
             <li>Nome: <span th:text="${elemento.nome}"></span> </li>
             <li>Custo: <span th:text="${elemento.custo}"></span> </li>
@@ -53,7 +49,5 @@
         <p th:if="${erro}" th:text="${erro}">
             Erro
         </p>
-    </div>
-        </div>
     </body>
 </html>

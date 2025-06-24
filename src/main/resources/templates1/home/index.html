@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="/css/layout.css"> -->
+        <link rel="stylesheet" href="/css/home.css">
+        <div th:replace="~{layout :: css}"></div>
+        <title>Home</title>
+    </head>
+    <body>
+        <nav th:replace="~{layout :: header}"></nav>
+
+        <h1>Bem vindo a Motor Tycoon</h1>
+
+        <h2>Produtos</h2>
+
+        <div th:if="${lista.size()} > 0" class="produto">
+            <ul th:each="e : ${lista}" style="border: 1px solid; width: 250px;">
+                <li><img th:src="${e.imagem}" style="width:100px;"></li>
+                <li>Código: <span th:text="${e.id}"></span> </li>
+                <li>Nome: <span th:text="${e.nome}"></span> </li>
+                <li>Custo: <span th:text="${e.custo}"></span> </li>
+                <li>Estoque: <span th:text="${e.estoque}"></span> </li>
+                <li>Categoria: <span th:text="${e.categoria.nome}"></span> </li>
+                <a th:href="@{equipamento/view/{id}(id=${e.id})}">Comprar</a>
+            </ul>
+        </div>
+
+        <!-- <p th:if="${lista.size()} == 0" th:text="Não há produtos cadastrados"></p> -->
+    </body>
+</html>

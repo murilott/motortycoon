@@ -4,61 +4,62 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:replace="~{layout :: css}"></div>
         <link rel="stylesheet" href="/css/cadastro.css">
-        <title>Novo Equipamento</title>
+        <title>Editar Equipamento - Motor Tycoon</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
-        <div>
-            <h2>Cadastrar Equipamento</h2>
+        <div class="container cadastro-container">
+            <div class="cadastro-form form-container">
+                <h2>Editar Equipamento</h2>
 
-            <button>Voltar</button>
+                <form th:action="@{/equipamento/salvar}" th:object="${elemento}" method="post">
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" placeholder="Nome do Equipamento" th:field="*{nome}" required>
+                        <p class="error-message" th:if="${#fields.hasErrors(\'nome\')}" th:errors="*{nome}">Erro de nome</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custo">Custo:</label>
+                        <input type="number" id="custo" placeholder="Custo do Equipamento" th:field="*{custo}" required>
+                        <p class="error-message" th:if="${#fields.hasErrors(\'custo\')}" th:errors="*{custo}">Erro de custo</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estoque">Estoque:</label>
+                        <input type="number" id="estoque" placeholder="Estoque do Equipamento" th:field="*{estoque}" required>
+                        <p class="error-message" th:if="${#fields.hasErrors(\'estoque\')}" th:errors="*{estoque}">Erro de estoque</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria:</label>
+                        <select id="categoria" name="categoria" th:field="*{categoria}" required>
+                            <option th:each="categoria : ${listaCategoria}"
+                                th:value="${categoria.id}"
+                                th:text="${categoria.nome}">
+                            </option>
+                        </select>            
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem:</label>
+                        <input type="text" id="imagem" placeholder="URL da Imagem" th:field="*{imagem}" required>
+                        <p class="error-message" th:if="${#fields.hasErrors(\'imagem\')}" th:errors="*{imagem}">Erro de imagem</p>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <a th:href="@{/equipamento}" class="btn btn-secondary">Voltar</a>
+                    </div>
+                </form>
+
+                <p class="message error" th:if="${erro != null}" th:text="${erro}"></p>
+            </div>
         </div>
-
-        <form th:action="@{/equipamento/salvar}" th:object="${elemento}" method="post">
-            <div>
-                <label for="nome">Nome</label>
-
-                <input type="text" placeholder="Nome:" th:field="*{nome}">
-                <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro de nome</p>
-            </div>
-
-            <div>
-                <label for="custo">Custo</label>
-
-                <input type="number" placeholder="Custo:" th:field="*{custo}">
-                <p th:if="${#fields.hasErrors('custo')}" th:errors="*{custo}">Erro de custo</p>
-            </div>
-
-            <div>
-                <label for="estoque">Estoque</label>
-
-                <input type="number" placeholder="Estoque:" th:field="*{estoque}">
-                <p th:if="${#fields.hasErrors('estoque')}" th:errors="*{estoque}">Erro de estoque</p>
-            </div>
-
-            <div>
-                <label for="categoria">Categoria</label>
-
-                <select name="categoria" id="categoria" th:field="*{categoria}">
-                    <option th:each="categoria : ${listaCategoria}"
-                        th:value="${categoria.id}"
-                        th:text="${categoria.nome}">
-                    </option>
-                </select>            
-            </div>
-
-            <div>
-                <label for="imagem">Insira uma imagem</label>
-
-                <input type="text" placeholder="Imagem:" th:field="*{imagem}">
-                <p th:if="${#fields.hasErrors('imagem')}" th:errors="*{imagem}">Erro de imagem</p>
-            </div>
-            
-            <button id="btnSalvar" type="submit">Salvar</button>
-        </form>
-
-        <p th:if="${erro != null}" th:text="${erro}"></p>
     </body>
 </html>

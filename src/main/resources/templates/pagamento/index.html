@@ -1,28 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pagamento</title>
+        <div th:replace="~{layout :: css}"></div>
+        <link rel="stylesheet" href="/css/pagamento.css">
+        <title>Formas de Pagamento - Motor Tycoon</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
-        <h2>Pagamentos</h2>
+        <div class="container pagamento-container">
+            <div class="pagamento-header">
+                <h2>Formas de Pagamento</h2>
+                <a th:href="@{pagamento/novo}" class="btn btn-primary">Nova Forma de Pagamento</a>
+            </div>
 
-        <a th:href="@{pagamento/novo}">Novo pagamento</a>
+            <div class="pagamento-table" th:if="${lista.size()} > 0">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="e : ${lista}">
+                            <td th:text="${e.id}"></td>
+                            <td th:text="${e.nome}"></td>
+                            <td><a th:href="@{pagamento/editar/{id}(id=${e.id})}" class="btn btn-edit">Editar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <table th:if="${lista.size()} > 0">
-            <tr>
-                <th>Código</th>
-                <th>Nome</th>
-              </tr>
-              <tr th:each="e : ${lista}">
-                <td th:text="${e.id}"></td>
-                <td th:text="${e.nome}"></td>
-                <td><a th:href="@{pagamento/editar/{id}(id=${e.id})}">Editar</a></td>
-              </tr>
-        </table>
+            <div class="no-products" th:if="${lista.size()} == 0">
+                <h3>Nenhuma forma de pagamento cadastrada</h3>
+                <p>Clique em "Nova Forma de Pagamento" para adicionar uma.</p>
+            </div>
+        </div>
     </body>
 </html>
