@@ -1,68 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script th:src="@{/js/carrinho.js}"></script>
-        <title>Carrinho</title>
+        <div th:replace="~{layout :: css}"></div>
+        <link rel="stylesheet" href="/css/carrinho.css">
+        <title>Carrinho de Compras - Motor Tycoon</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
-        <div>
-            <h2>Itens do Carrinho</h2>
+        <div class="container carrinho-container">
+            <div class="carrinho-header">
+                <h2>Itens do Carrinho</h2>
+            </div>
+
+            <div class="carrinho-summary" th:if="${carrinho}">
+                <div class="summary-item">
+                    <span class="summary-label">Custo Total:</span>
+                    <span class="summary-value" th:text="${carrinho?.custoTotal}"></span>
+                </div>
+            </div>
+
+            <div class="carrinho-messages">
+                <div class="message error" th:if="${param.erro}">
+                    Item não encontrado.
+                </div>
+                <div class="message success" th:if="${param.sucesso}">
+                    Item removido com sucesso.
+                </div>
+                <div class="message success" th:if="${param.finalizar}">
+                    Compra finalizada com sucesso.
+                </div>
+                <div class="message info" th:if="${param.vazio}">
+                    Carrinho vazio.
+                </div>
+            </div>
+
+            <h3>Itens no Carrinho</h3>
+
+            <div class="carrinho-table" th:if="${carrinho?.itens.size()} > 0">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Custo Unitário</th>
+                            <th>Custo Total</th>
+                            <th>Imagem</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="e : ${carrinho.itens}">
+                            <td th:text="${e.id}"></td>
+                            <td th:text="${e.produto.nome}"></td>
+                            <td th:text="${e.quantidade}"></td>
+                            <td th:text="${e.produto.custo}"></td>
+                            <td th:text="${(e.produto.custo * e.quantidade)}"></td>
+                            <td><img th:src="${e.produto.imagem}" alt="Imagem do Produto"></td>
+                            <td><a th:href="@{carrinho/remover/{id}(id=${e.id})}" class="btn btn-remove">Remover</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="no-products" th:if="${carrinho?.itens.size()} == 0">
+                <h3>Seu carrinho está vazio.</h3>
+                <p>Adicione produtos para continuar suas compras!</p>
+            </div>
+
+            <div class="carrinho-actions">
+                <a th:href="@{/carrinho/finalizar}" class="btn btn-primary" th:if="${carrinho?.itens.size()} > 0">Finalizar Compra</a>
+                <a th:href="@{/}" class="btn btn-secondary">Continuar Comprando</a>
+            </div>
+
+            <p class="message error" th:if="${erro != null}" th:text="${erro}"></p>
         </div>
-
-        <div>
-            <label for="cod">Código</label>
-            <p th:text="${carrinho?.id}"></p>
-
-            <label for="cod">Custo total</label>
-            <p th:text="${carrinho?.custoTotal}"></p>
-        </div>
-
-        <div th:if="${param.erro}">
-            Item não encontrado.
-        </div>
-
-        <div th:if="${param.sucesso}">
-            Item removido com sucesso.
-        </div>
-
-        <div th:if="${param.finalizar}">
-            Compra finalizada com sucesso.
-        </div>
-
-        <div th:if="${param.vazio}">
-            Carrinho vazio.
-        </div>
-
-        <h3>Itens do Carrinho</h3>
-
-        <table th:if="${carrinho}">
-            <tr>
-                <th>Código</th>
-                <th>Custo</th>
-                <th>Quantidade</th>
-                <th>Produto</th>
-                <th>Categoria</th>
-                <th>Imagem</th>
-              </tr>
-              <tr th:each="e : ${carrinho.itens}">
-                <td th:text="${e.id}"></td>
-                <td th:text="${e.custo}"></td>
-                <td th:text="${e.quantidade}"></td>
-                <td th:text="${e.produto.nome}"></td>
-                <td th:text="${e.produto.categoria.nome}"></td>
-                <td><img th:src="${e.produto.imagem}" style="width:100px;"></td>
-                <td><a th:href="@{carrinho/remover/{id}(id=${e.id})}">Remover</a></td>
-            </tr>
-        </table>
-
-        <br>
-
-        <a th:href="@{carrinho/finalizar}">Finalizar compra</a>
-
-        <p th:if="${erro != null}" tx:text="${erro}"></p>
     </body>
 </html>

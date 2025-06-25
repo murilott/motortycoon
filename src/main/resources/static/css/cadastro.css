@@ -1,0 +1,116 @@
+/* Estilos para Páginas de Cadastro (Novo/Editar) */
+.cadastro-container {
+    padding: 2rem 0;
+}
+
+.cadastro-form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.cadastro-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--main);
+    font-family: var(--font-title);
+    text-transform: uppercase;
+}
+
+.cadastro-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.cadastro-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    font-family: var(--font-body);
+}
+
+.cadastro-form input,
+.cadastro-form select,
+.cadastro-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: var(--font-body);
+    transition: var(--transition);
+}
+
+.cadastro-form input:focus,
+.cadastro-form select:focus,
+.cadastro-form textarea:focus {
+    outline: none;
+    border-color: var(--main);
+    box-shadow: 0 0 0 3px rgba(240, 24, 22, 0.1);
+}
+
+.cadastro-form input[type="file"] {
+    border: none;
+    padding: 0;
+}
+
+.cadastro-form .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.cadastro-form .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cadastro-form .btn-primary {
+    background-color: var(--main);
+    color: white;
+}
+
+.cadastro-form .btn-primary:hover {
+    background-color: #d01614;
+    transform: translateY(-2px);
+}
+
+.cadastro-form .btn-secondary {
+    background-color: var(--dark);
+    color: white;
+}
+
+.cadastro-form .btn-secondary:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.cadastro-form .error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cadastro-form {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+    
+    .cadastro-form .form-actions {
+        flex-direction: column;
+    }
+}
+

@@ -73,18 +73,17 @@ public class SessaoController {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, @Valid @RequestParam(name = "cargo", required = false) Boolean admin, BindingResult bindingResult) {
+    public ModelAndView processRegister(@Valid @ModelAttribute("elemento")  Usuario usuario, @Valid @RequestParam(name = "cargo", required = false) Boolean admin, BindingResult bindingResult) {
         try {
             if ( bindingResult.hasErrors() ) {
-                for (ObjectError error : bindingResult.getAllErrors()) {
-            System.out.println("AAAAAAAAAAAAAAAAAAA Erro de validação: " + error.getDefaultMessage());
-        }
-
+                for (FieldError error : bindingResult.getFieldErrors()) {
+                    System.out.println("Erro no campo: " + error.getField() + " - " + error.getDefaultMessage());
+                }
+                
                 var mv = new ModelAndView("sessao/registrar");
                 usuario.setSenha(null);
                 mv.addObject("elemento", usuario);
                 mv.addObject("listaPagamento", pagamentoService.obterTodos());
-                
                 return mv;
             }
             

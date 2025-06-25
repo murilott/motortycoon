@@ -7,20 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div th:fragment="css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/global.css">
         <link rel="stylesheet" href="/css/layout.css">
         <script th:src="@{/js/carrinho.js}"></script>
     </div>
-    
     <title>Layout</title>
 </head>
 <body>
     <nav th:fragment="header">
-        <div id="header">
+        <div class="header container">
             <h2><strong>Motor Tycoon</strong></h2>
-            <!-- th:text="${#authentication.principal.carrinhoAtual.obterTamanhoCarrinho()}" -->
+
             <ul id="options">
                 <li><a th:href="@{/}">Home</a></li>
-                <li th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/carrinho}">Carrinho</a> <span id="numero-itens-carrinho"></span></li>     
+                <li th:if="${#authorization.expression('isAuthenticated()')}" style="position: relative;"><a th:href="@{/carrinho}">Carrinho</a> <span id="numero-itens-carrinho" th:text="${#authentication.principal.carrinhoAtual.obterTamanhoCarrinho()}"></span></li>     
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/equipamento}">Equipamento</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categoria}">Categoria</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/pagamento}">Pagamento</a></li>    
@@ -28,9 +32,7 @@
             </ul>
 
             <ul id="login">
-                <li  th:if="${#authorization.expression('isAuthenticated()')}">Bem vindo, <span th:text="${#authentication.principal.nomeCompleto}"></span>
-                    <span th:text="${#authentication.authorities}"></span>
-                </li>
+                <li  th:if="${#authorization.expression('isAuthenticated()')}">Bem vindo, <span th:text="${#authentication.principal.nomeCompleto}"></span></li>
 
                 <li th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login/redefinir}">Mudar senha</a></li>
                 <li th:unless="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login/registrar}">Cadastrar</a></li>

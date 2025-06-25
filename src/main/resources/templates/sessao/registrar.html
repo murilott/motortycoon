@@ -5,15 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <div th:replace="~{layout :: css}"></div>
+        <link rel="stylesheet" href="/css/cadastro.css">
         <title>Novo Usuario</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
+        <div class="cadastro-container">
+        <div class="cadastro-form">
         <div>
             <h2>Cadastre-se</h2>
 
-            <button>Voltar</button>
         </div>
 
         <form th:action="@{/login/registrar}" th:object="${elemento}" method="post">
@@ -78,5 +80,7 @@
 
         <p class="error" th:if="${erro != null}" th:text="${erro}"></p>
         <p class="errorBinding" th:if="${erroBinding != null}" th:text="${erroBinding}"></p>
+    </div>
+    </div>
     </body>
 </html>

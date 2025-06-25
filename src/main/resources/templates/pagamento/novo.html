@@ -4,18 +4,18 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/cadastro.css">
+        <link rel="stylesheet" href="/css/cadastro.css"><div th:replace="~{layout :: css}"></div>
+        <link rel="stylesheet" href="/css/pagamento.css">
         <title>Nova Pagamento</title>
     </head>
     <body>
         <nav th:replace="~{layout :: header}"></nav>
 
-        <div>
+        <div class="pagamento-header">
             <h2>Cadastrar Método de Pagamento</h2>
-            <button>Voltar</button>
         </div>
 
-        <form th:action="@{/pagamento/salvar}" th:object="${elemento}" method="post">
+        <form th:action="@{/pagamento/salvar}" th:object="${elemento}" method="post" class="pagamento-form container">
             <input readonly hidden type="text" th:field="*{id}">
             
             <div>

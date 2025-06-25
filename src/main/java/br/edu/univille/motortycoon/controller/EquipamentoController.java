@@ -59,6 +59,15 @@ public class EquipamentoController {
                 mv.addObject("listaCategoria", categoriaService.obterTodos());
                 return mv;
             }
+
+            if ( equipamento.getEstoque() <= 0 ) {
+                var mv = new ModelAndView("equipamento/novo");
+                mv.addObject("elemento", equipamento);
+                mv.addObject("listaCategoria", categoriaService.obterTodos());
+                mv.addObject("erroQuantidade", "Selecione uma quantidade maior que 0");
+                
+                return mv;
+            }
             
             service.salvar(equipamento);
             return new ModelAndView("redirect:/equipamento");
@@ -102,11 +111,12 @@ public class EquipamentoController {
             var opt = service.obterPeloId(id);
         
             if(opt.isPresent()) {
-                ItemCarrinho novoitem = new ItemCarrinho();
-                novoitem.setProduto(opt.get());
+                // ItemCarrinho novoitem = new ItemCarrinho();
+                // novoitem.setProduto(opt.get());
+                item.setProduto(opt.get());
 
                 mv.addObject("elemento", opt.get());
-                mv.addObject("itemCarrinho", novoitem);
+                mv.addObject("itemCarrinho", item);
                 mv.addObject("listaCarrinho", carrinhoService.obterTodos());
                 return mv;
             }

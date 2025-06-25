@@ -39,15 +39,16 @@ public class ProdutoServiceTests {
     @Test
     public void testSalvarProduto() {
         // Define os valores constantes utilizados
-        final int ESTOQUE_PADRAO = 10;
-        final float CUSTO_PADRAO = 50;
+        final int ESTOQUE_ESPERADO = 10;
+        final float CUSTO_ESPERADO = 50;
+        final String NOME_ESPERADO =  "Capacete M";
         final int QUANTIDADE_ESPERADA_DE_CHAMADA = 1;
 
         // Cria o produto
         Equipamento equipamento = new Equipamento();
-        equipamento.setNome("Capacete M");
-        equipamento.setEstoque(ESTOQUE_PADRAO);
-        equipamento.setCusto(CUSTO_PADRAO);
+        equipamento.setNome(NOME_ESPERADO);
+        equipamento.setEstoque(ESTOQUE_ESPERADO);
+        equipamento.setCusto(CUSTO_ESPERADO);
 
         // Simula a persistência do objeto 'equipamento' no repositório, retornando o próprio objeto 'equipamento'
         when(equipamentoRepository.save(equipamento)).thenReturn(equipamento);
@@ -58,9 +59,9 @@ public class ProdutoServiceTests {
         // Verifica se o método save foi chamado uma vez no mock e está salvo no repositório
         verify(equipamentoRepository, times(QUANTIDADE_ESPERADA_DE_CHAMADA)).save(equipamento);
 
-        assertEquals("Capacete M", equipamentoSalvo.getNome());
-        assertEquals(ESTOQUE_PADRAO, equipamentoSalvo.getEstoque());
-        assertEquals(CUSTO_PADRAO, equipamentoSalvo.getCusto());
+        assertEquals(NOME_ESPERADO, equipamentoSalvo.getNome());
+        assertEquals(ESTOQUE_ESPERADO, equipamentoSalvo.getEstoque());
+        assertEquals(CUSTO_ESPERADO, equipamentoSalvo.getCusto());
     }
 
     // SMELL
