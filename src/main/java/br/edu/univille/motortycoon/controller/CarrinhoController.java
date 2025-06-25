@@ -85,6 +85,7 @@ public class CarrinhoController {
                 long id = item.getProduto().getId();
                 var mv = new ModelAndView("redirect:/equipamento/view/" + id + "?quantidadeMenor");
                 mv.addObject("elemento", item);
+                mv.addObject("itemCarrinho", item);
                 return mv;
             }
 
@@ -92,6 +93,7 @@ public class CarrinhoController {
                 long id = item.getProduto().getId();
                 var mv = new ModelAndView("redirect:/equipamento/view/" + id + "?quantidadeEstoque");
                 mv.addObject("elemento", item);
+                mv.addObject("itemCarrinho", item);
                 return mv;
             }
 
@@ -99,6 +101,7 @@ public class CarrinhoController {
                 long id = item.getProduto().getId();
                 var mv = new ModelAndView("redirect:/equipamento/view/" + id);
                 mv.addObject("elemento", item);
+                mv.addObject("itemCarrinho", item);
                 return mv;
             }
             

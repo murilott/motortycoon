@@ -102,11 +102,12 @@ public class EquipamentoController {
             var opt = service.obterPeloId(id);
         
             if(opt.isPresent()) {
-                ItemCarrinho novoitem = new ItemCarrinho();
-                novoitem.setProduto(opt.get());
+                // ItemCarrinho novoitem = new ItemCarrinho();
+                // novoitem.setProduto(opt.get());
+                item.setProduto(opt.get());
 
                 mv.addObject("elemento", opt.get());
-                mv.addObject("itemCarrinho", novoitem);
+                mv.addObject("itemCarrinho", item);
                 mv.addObject("listaCarrinho", carrinhoService.obterTodos());
                 return mv;
             }
