@@ -34,6 +34,7 @@
                         <label for="estoque">Estoque:</label>
                         <input type="number" id="estoque" placeholder="Estoque do Equipamento" th:field="*{estoque}" required>
                         <p class="error-message" th:if="${#fields.hasErrors('estoque')}" th:errors="*{estoque}">Erro de estoque</p>
+                        <p class="error-message" th:if="${erroQuantidade}" th:text="${erroQuantidade}"></p>
                     </div>
 
                     <div class="form-group">

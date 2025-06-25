@@ -24,8 +24,8 @@ public class Equipamento {
     @DecimalMin(value = "0.01", message = "Custo mínimo 0.01")
     @NotNull(message = "Custo não deve ficar em branco")
     private float custo;
-    @Min(value = 1, message = "Estoque mínimo 1")
-    @NotNull(message = "Estoque não deve ficar em branco")
+    // @Min(value = 1, message = "Estoque mínimo 1")
+    // @NotNull(message = "Estoque não deve ficar em branco")
     private int estoque;
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")

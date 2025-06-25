@@ -36,10 +36,10 @@
                         <input readonly hidden type="text" th:field="*{produto.imagem}">
                     </div>
                     
-                    <div th:if="${param.quantidadeMenor}">
+                    <div class="message error" th:if="${param.quantidadeMenor}">
                         Selecione pelo menos uma unidade.
                     </div>
-                    <div th:if="${param.quantidadeEstoque}">
+                    <div class="message error" th:if="${param.quantidadeEstoque}">
                         Quantidade selecionada excede o estoque.
                     </div>
 

@@ -59,6 +59,15 @@ public class EquipamentoController {
                 mv.addObject("listaCategoria", categoriaService.obterTodos());
                 return mv;
             }
+
+            if ( equipamento.getEstoque() <= 0 ) {
+                var mv = new ModelAndView("equipamento/novo");
+                mv.addObject("elemento", equipamento);
+                mv.addObject("listaCategoria", categoriaService.obterTodos());
+                mv.addObject("erroQuantidade", "Selecione uma quantidade maior que 0");
+                
+                return mv;
+            }
             
             service.salvar(equipamento);
             return new ModelAndView("redirect:/equipamento");

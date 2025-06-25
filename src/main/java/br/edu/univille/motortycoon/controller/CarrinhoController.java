@@ -115,10 +115,26 @@ public class CarrinhoController {
             carrinho.setCustoTotal(carrinho.calcularCustoTotal());
 
             Equipamento produto = equipamentoService.obterPeloId(item.getProduto().getId()).get();
-            produto.setEstoque(produto.getEstoque() - item.getQuantidade());
-            equipamentoService.salvar(produto);
+            // produto.setEstoque(produto.getEstoque() - item.getQuantidade());
 
+            System.out.println("PRODUTO ESTOQUWEEE: " + produto);
+            System.out.println("quantidadeeeeee: " + item.getQuantidade());
+
+            if (produto.getEstoque() == item.getQuantidade()) {
+                // Se a quantidade for igual ao estoque, o estoque deve ser zerado após a compra
+                produto.setEstoque(0);
+            } else {
+                // Caso contrário, subtrai a quantidade do estoque
+                produto.setEstoque(produto.getEstoque() - item.getQuantidade());
+            }
+
+            System.out.println("DEPOIS DO ESTOQUEEEEE");
+            
+            equipamentoService.salvar(produto);
+            
+            System.out.println("DEPOIS DE SALVAR RQUIPAMENTOOOO");
             service.salvar(carrinho);
+            System.out.println("DEPOIS DE SALVAR CARRINHOOOOO");
             return new ModelAndView("redirect:/carrinho");
         }catch (Exception e){
             long id = item.getProduto().getId();
