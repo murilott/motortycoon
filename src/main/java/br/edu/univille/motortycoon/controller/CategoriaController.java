@@ -72,7 +72,7 @@ public class CategoriaController {
     @GetMapping
     @RequestMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable long id){
-        var mv = new ModelAndView("categoria/editar");
+        // var mv = new ModelAndView("categoria/editar");
         var opt = service.obterPeloId(id);
 
         if(opt.isPresent()) {

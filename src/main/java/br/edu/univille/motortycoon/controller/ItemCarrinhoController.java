@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.motortycoon.entity.ItemCarrinho;
-import br.edu.univille.motortycoon.service.CarrinhoService;
 import br.edu.univille.motortycoon.service.ItemCarrinhoService;
 import jakarta.validation.Valid;
 
@@ -73,7 +72,7 @@ public class ItemCarrinhoController {
     @GetMapping
     @RequestMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable long id){
-        var mv = new ModelAndView("itemCarrinho/editar");
+        // var mv = new ModelAndView("itemCarrinho/editar");
         var opt = service.obterPeloId(id);
 
         if(opt.isPresent()) {

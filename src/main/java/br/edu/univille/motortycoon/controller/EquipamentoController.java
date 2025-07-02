@@ -15,7 +15,6 @@ import br.edu.univille.motortycoon.entity.ItemCarrinho;
 import br.edu.univille.motortycoon.service.CarrinhoService;
 import br.edu.univille.motortycoon.service.CategoriaService;
 import br.edu.univille.motortycoon.service.EquipamentoService;
-import br.edu.univille.motortycoon.service.ItemCarrinhoService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -24,8 +23,8 @@ public class EquipamentoController {
     @Autowired
     private EquipamentoService service;
 
-    @Autowired
-    private ItemCarrinhoService itemCarrinhoService;
+    // @Autowired
+    // private ItemCarrinhoService itemCarrinhoService;
 
     @Autowired
     private CategoriaService categoriaService;
@@ -139,7 +138,7 @@ public class EquipamentoController {
     @GetMapping
     @RequestMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable long id){
-        var mv = new ModelAndView("equipamento/editar");
+        // var mv = new ModelAndView("equipamento/editar");
         var opt = service.obterPeloId(id);
 
         if(opt.isPresent()) {

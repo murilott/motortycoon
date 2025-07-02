@@ -247,7 +247,7 @@ public class CarrinhoController {
     @GetMapping
     @RequestMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable long id){
-        var mv = new ModelAndView("carrinho/editar");
+        // var mv = new ModelAndView("carrinho/editar");
         var opt = service.obterPeloId(id);
 
         if(opt.isPresent()) {

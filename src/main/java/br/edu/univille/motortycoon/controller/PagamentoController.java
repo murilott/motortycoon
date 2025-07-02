@@ -72,7 +72,7 @@ public class PagamentoController {
     @GetMapping
     @RequestMapping("/{id}/excluir")
     public ModelAndView excluir(@PathVariable long id){
-        var mv = new ModelAndView("pagamento/editar");
+        // var mv = new ModelAndView("pagamento/editar");
         var opt = service.obterPeloId(id);
 
         if(opt.isPresent()) {

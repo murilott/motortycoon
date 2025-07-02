@@ -1,7 +1,6 @@
 package br.edu.univille.motortycoon;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,16 +11,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import br.edu.univille.motortycoon.entity.Categoria;
-import br.edu.univille.motortycoon.entity.Equipamento;
 import br.edu.univille.motortycoon.repository.CategoriaRepository;
-import br.edu.univille.motortycoon.repository.EquipamentoRepository;
 import br.edu.univille.motortycoon.service.CategoriaService;
-import br.edu.univille.motortycoon.service.EquipamentoService;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
