@@ -73,7 +73,6 @@ public class SessaoController {
                 // usuario.setSenha(null);
                 // mv.addObject("elemento", usuario);
                 mv.addObject("listaPagamento", pagamentoService.obterTodos());
-                
                 return mv;
             }
             

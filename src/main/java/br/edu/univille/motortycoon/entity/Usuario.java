@@ -85,14 +85,14 @@ public class Usuario implements UserDetails {
     @Override
 public String toString() {
     return "Usuario [id=" + id 
-           + ", nomeCompleto=" + nomeCompleto 
-           + ", email=" + email 
-           + ", dataNascimento=" + dataNascimento 
-           + ", endereco=" + endereco 
-           + ", cpf=" + cpf 
-           + ", formaPagamentoCount=" + (formaPagamento != null ? formaPagamento.size() : 0)
-           + ", carrinhoAtualId=" + (carrinhoAtual != null ? carrinhoAtual.getId() : "null")
-           + ", historicoCount=" + (historico != null ? historico.size() : 0)
-           + "]";
+            + ", nomeCompleto=" + nomeCompleto 
+            + ", email=" + email 
+            + ", dataNascimento=" + dataNascimento 
+            + ", endereco=" + endereco 
+            + ", cpf=" + cpf 
+            + ", formaPagamentoCount=" + (formaPagamento != null ? formaPagamento.size() : 0)
+            + ", carrinhoAtualId=" + (carrinhoAtual != null ? carrinhoAtual.getId() : "null")
+            + ", historicoCount=" + (historico != null ? historico.size() : 0)
+            + "]";
 }
 }
