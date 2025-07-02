@@ -22,7 +22,7 @@
             <div>
                 <label for="nome">Nome</label>
 
-                <input type="text" placeholder="Nome completo:" th:field="*{nomeCompleto}">
+                <input type="text" placeholder="Nome completo:" th:field="*{nomeCompleto}" required>
                 <p th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}">Erro de nome</p>
             </div>
 

@@ -68,6 +68,10 @@ public class EquipamentoController {
                 
                 return mv;
             }
+
+            if ( equipamento.getImagem().isBlank() ) {
+                equipamento.setImagem("https://dn721803.ca.archive.org/0/items/placeholder-image//placeholder-image.jpg");
+            }
             
             service.salvar(equipamento);
             return new ModelAndView("redirect:/equipamento");

@@ -60,6 +60,7 @@ public class SessaoController {
 
     @GetMapping("/registrar")
     public ModelAndView registrar() {
+        
         var mv = new ModelAndView("sessao/registrar");
         mv.addObject("elemento", new Usuario());
         mv.addObject("listaPagamento", pagamentoService.obterTodos());
@@ -73,16 +74,13 @@ public class SessaoController {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView processRegister(@ModelAttribute("elemento") @Valid Usuario usuario, @Valid @RequestParam(name = "cargo", required = false) Boolean admin, BindingResult bindingResult) {
+    public ModelAndView processRegister (@Valid @ModelAttribute("elemento") Usuario usuario, BindingResult bindingResult, @Valid @RequestParam(name = "cargo", required = false) Boolean admin) {
         try {
             if ( bindingResult.hasErrors() ) {
-                for (ObjectError error : bindingResult.getAllErrors()) {
-            System.out.println("AAAAAAAAAAAAAAAAAAA Erro de validação: " + error.getDefaultMessage());
-        }
-
                 var mv = new ModelAndView("sessao/registrar");
-                usuario.setSenha(null);
-                mv.addObject("elemento", usuario);
+                // bindingResult.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
+                // usuario.setSenha(null);
+                // mv.addObject("elemento", usuario);
                 mv.addObject("listaPagamento", pagamentoService.obterTodos());
                 
                 return mv;
@@ -126,6 +124,7 @@ public class SessaoController {
             return new ModelAndView("redirect:/login?registered"); 
         } catch (Exception e){
             var mv = new ModelAndView("sessao/registrar");
+            // mv.addObject("elemento", usuario);
             mv.addObject("listaPagamento", pagamentoService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;

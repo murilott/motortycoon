@@ -2,6 +2,7 @@ package br.edu.univille.motortycoon.security;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,11 @@ import br.edu.univille.motortycoon.repository.UsuarioRepository;
 public class SecurityConfig implements WebMvcConfigurer {
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    public SecurityConfig(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -50,7 +56,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
         .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login/registrar/**", "/login/redefinir/**", "/login/**", "/", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/login/registrar/**", "/login/registrar", "/error" , "/login/redefinir/**", "/login/**", "/", "/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
