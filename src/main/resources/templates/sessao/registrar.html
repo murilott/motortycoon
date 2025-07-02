@@ -50,7 +50,7 @@
             <div>
                 <label for="senha">Senha</label>
 
-                <input type="text" placeholder="Senha:" th:field="*{senha}">
+                <input type="password" placeholder="Senha:" th:field="*{senha}">
                 <p th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">Erro de senha</p>
             </div>
 

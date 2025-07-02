@@ -20,7 +20,7 @@
             <h2>Produtos</h2>
 
             <div th:if="${lista.size()} > 0" class="produto">
-                <ul th:each="e : ${lista}">
+                <ul th:each="e : ${lista}" th:if="${e.estoque} > 0">
                     <li th:style="'width: 500px; height: 500px; background: url(' + @{${e.imagem}} + ') no-repeat center center; background-size: contain;'"></li>
                     <li>Código: <span th:text="${e.id}"></span> </li>
                     <li>Nome: <span th:text="${e.nome}"></span> </li>
