@@ -22,10 +22,13 @@
 /* Grid de produtos */
 .produto {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  margin: 0 auto;
   margin-top: 2rem;
   max-width: 548px;
+  max-width: fit-content;
 }
 
 .produto ul {
